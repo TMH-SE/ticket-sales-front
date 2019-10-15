@@ -21,6 +21,6 @@ deployBackToAWS:
   script:
     - npm run build
     - ls
-    - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r /build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
+    - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
     - bash deploy/deploy.sh
   when: manual
