@@ -1,0 +1,35 @@
+.header {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  #app-name {
+    font-family: 'Allerta Stencil', sans-serif;
+    #app-brand {
+      color: #f00;
+      font-size: 26px;
+    }
+  }
+  .menu {
+    line-height: 64px;
+    height: 64px;
+    .menu-item:hover {
+      color: #0cc;
+      border-bottom: 1.5px solid #0cc;
+    }
+    .ant-menu-item-selected {
+      color: #0cc;
+      border-bottom: 1.5px solid #0cc;
+    }
+  }
+}
+
+.main-content {
+  background-color: #fff;
+  min-height: calc(100vh - 64px);
+  width: 100vw;
+  padding: 1em 50px;
+}
+
+.btnSuccess {
+  background-color: #28a745;
+  color: #fff;
+}
