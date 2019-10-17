@@ -13,8 +13,6 @@ deployBackToAWS:
   stage: deploy
   before_script: 
      - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-     - apt-get update -y
-     - apt-get -y install rsync
      - mkdir -p ~/.ssh     
      - echo -e "$SSH_SECRET_KEY" > ~/.ssh/id_rsa
      - chmod 600 ~/.ssh/id_rsa
@@ -22,7 +20,6 @@ deployBackToAWS:
   script:
     - npm run build
     - ls
-    # - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
-    - rsync -a -e "ssh -o 'StrictHostKeyChecking=no' ec2-user@3.229.129.81" ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/ --delete
+    - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
     - bash deploy/deploy.sh
   when: manual
