@@ -47,7 +47,7 @@ function ClientLayout(props) {
             </h1>
           </Col>
           <Col md={{ span: 18 }} lg={{ span: 20 }}>
-            <Row type='flex' justify='space-between' align='middle'>
+            <Row type='flex' justify='end' align='middle'>
               <Menu
                 defaultSelectedKeys={[menuKey]}
                 mode='horizontal'
@@ -65,6 +65,7 @@ function ClientLayout(props) {
                   </Menu.Item>
                 ))}
               </Menu>
+              <div style={{marginLeft: '5em'}}>
               {isAuth ? (
                 <Dropdown
                   key='0'
@@ -77,6 +78,7 @@ function ClientLayout(props) {
               ) : (
                 <Button type='primary' onClick={() => history.push('/login')}>Đăng nhập</Button>
               )}
+              </div>
             </Row>
           </Col>
         </Row>
