@@ -1,3 +1,5 @@
+pm2 delete TICKET_FRONTEND
+
 pm2 status
 
 cd ticket-sales-front

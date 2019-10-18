@@ -4,7 +4,6 @@ stages:
   - deploy
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
   paths:
   - node_modules/
 
@@ -20,6 +19,6 @@ deployBackToAWS:
      - npm install
   script:
     - npm run build
-    - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r /build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
+    - ls
+    - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
     - bash deploy/deploy.sh
-  when: manual
