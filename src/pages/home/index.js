@@ -9,8 +9,8 @@ import Intruduce from './intruduce'
 function index(props) {
   return (
     <Layout>
-      <Banner {...props} />
-      <SearchRoute />
+      {/* <Banner {...props} /> */}
+      {/* <SearchRoute /> */}
       {/* <Intruduce {...props} /> */}
     </Layout>
   )
