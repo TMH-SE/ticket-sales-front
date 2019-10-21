@@ -1,5 +1,5 @@
 .home-container {
-  height: 100vh;
+  height: calc(100vh - 64px);
   background-image: url('../../assets/background_login2.jpg');
   background-origin: border-box;
   background-size: cover;
