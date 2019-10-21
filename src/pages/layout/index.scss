@@ -1,3 +1,12 @@
+section .ant-layout{
+  background-image: url('../../assets/background_login2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: inherit;
+  height: inherit;
+}
+
 .header {
   background: #fff;
   border-bottom: 1px solid #e8e8e8;
@@ -26,10 +35,11 @@
   background-color: #fff;
   min-height: calc(100vh - 64px);
   width: 100vw;
-  padding: 1em 50px;
+  padding-top: 0.5em;
 }
 
 .btnSuccess {
   background-color: #28a745;
   color: #fff;
 }
+

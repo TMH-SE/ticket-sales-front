@@ -1,0 +1,107 @@
+.banner{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    img{
+        width: inherit;
+        height: inherit;
+    }
+    height: 600px;
+}
+
+
+
+.text-banner-center{
+    position: absolute;
+    color:orangered;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-banner-right{
+    position: absolute;
+    color:orangered;
+    top: 40%;
+    right: -25%;
+    transform: translate(-50%, -50%);
+}
+
+.text-banner-left{
+    position: absolute;
+    color:orangered;
+    top: 35%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.text-banner{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 70px;
+}
+
+.text-h1{
+    font-size:30px;
+    color:white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.searchRoute{
+    margin-top: -5px;
+    background: black;
+    font-weight: 700;
+   
+
+   
+}
+
+.line-vertical{
+    border-top: 3px solid red;
+    height: inherit;
+    width: 75%;
+}
+
+.line{
+    border-left: 1px solid whitesmoke;
+    height: 150px;
+    margin-left:20%;
+    padding:0 !important;
+}
+
+.text-searchRoute{
+    margin: 35px;
+}
+
+.input-SearchRoute{
+    margin: 25px 30px 20px 20px;
+}
+
+.ant-card-meta-title{
+    color: black;
+    font-weight: 700 !important;
+}
+
+.ant-card-meta-description{
+    color:black !important;
+}
+
+.text-slogan{
+    padding: 80px;
+    h3{
+        font-size: 40px;color:orangered;font-weight: 600;
+    }
+    h4{
+        font-size:25px;color:white;font-weight: 600;
+    }
+}
+
+
+.countup {
+   padding-top: 100px;
+   padding-bottom: 100px;
+  }
+
+.account-balance{
+    font-size: 25px;
+    margin: 0 auto;
+  }
