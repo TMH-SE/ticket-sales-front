@@ -1,35 +1,129 @@
 .header {
   background: #fff;
   border-bottom: 1px solid #e8e8e8;
-  #app-name {
-    font-family: 'Allerta Stencil', sans-serif;
-    #app-brand {
-      color: #f00;
-      font-size: 26px;
-    }
-  }
   .menu {
     line-height: 64px;
     height: 64px;
     .menu-item:hover {
       color: #0cc;
-      border-bottom: 1.5px solid #0cc;
+      border-bottom: 2px solid #0cc;
     }
     .ant-menu-item-selected {
       color: #0cc;
-      border-bottom: 1.5px solid #0cc;
+      border-bottom: 2px solid #0cc;
     }
   }
 }
 
+#app-name {
+  text-align: center;
+  font-family: 'Allerta Stencil', sans-serif;
+  #app-brand {
+    color: #f00;
+    font-size: 26px;
+  }
+}
+
+.menu-item {
+  cursor: pointer;
+}
+
 .main-content {
   background-color: #fff;
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
   width: 100vw;
-  padding: 1em 50px;
 }
 
 .btnSuccess {
   background-color: #28a745;
   color: #fff;
+}
+
+.footer {
+background: #002147;
+height: auto;
+padding-bottom: 1em;
+position: relative;
+width: 100%;
+}
+.footer p {
+margin: 0;
+}
+.footer img {
+max-width: 100%;
+}
+.footer h3 {
+color: white;
+font-size: 18px;
+font-weight: 600;
+line-height: 27px;
+padding: 1.5em 0 0px;
+text-transform: uppercase;
+margin-bottom: 15px;
+}
+.footer h4 {
+color: white;
+font-size: 2em;
+font-weight: 600;
+line-height: 38px;
+padding: 1em 0 10px;
+font-family: cursive;
+font-weight: lighter
+}
+.footer ul {
+font-size: 13px;
+list-style-type: none;
+margin-left: 0;
+padding-left: 0;
+margin-top: 0px;
+color: #7F8C8D;
+padding: 0 0 8px 0;
+}
+.footer ul li a {
+padding: 0 0 12px 0;
+display: block;
+}
+.footer a, .footer-link {
+color: white;
+font-weight: lighter;
+}
+.footer p {
+color: white;
+font-weight: lighter;
+font-size: 20px;
+}
+.footer a:hover, .footer-link:hover {
+text-decoration:none;
+font-weight: bold;
+}
+
+.footer a, .footer-link {
+color: #78828D
+}
+.footer-bottom {
+margin-top: 2em;
+border-top: 1px solid #DDDDDD;
+padding-top: 20px;
+padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+padding-top: 6px;
+font-size: 0.75em
+}
+.col-footer{
+  margin-right: 25px;
+  margin-left: 25px;
+}
+.footer-title{
+  text-align: center;
+}
+.ant-layout-footer{
+  padding:0 !important;
+}
+.menu-footer{
+  color:#78828D
+}
+.address-footer{
+  color: #78828D !important;
+  font-size: 14px !important;
 }
