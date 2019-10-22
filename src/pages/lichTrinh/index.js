@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Table, Button } from 'antd';
+import { Row, Table, Button, Icon } from 'antd'
 import './index.scss'
 
 const columns = [
@@ -39,10 +39,9 @@ const columns = [
     title: 'Đặt Vé',
     dataIndex: '',
     key: 'x',
-    render: () => <Button type="danger">Đặt Vé</Button>
+    render: () => <Button type='danger'>Đặt Vé</Button>
   }
 ]
-
 
 const tuyen = [
   {
@@ -99,11 +98,12 @@ const tuyen = [
 
 function index() {
   return (
-    <div className="lichtrinh">
+    <div className='lichtrinh'>
       {tuyen.map(item => (
         <Row>
-          <br />
-          <h3 style={{ fontWeight: '700' }}>{item.title}</h3>
+          <h3 style={{ fontWeight: '700', color: '#f00', marginTop: '.5em' }}>
+            <Icon type='swap' /> {item.title}
+          </h3>
           <Table columns={columns} dataSource={item.data} />
           <hr />
         </Row>

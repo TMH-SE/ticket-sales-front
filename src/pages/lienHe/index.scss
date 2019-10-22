@@ -1,17 +1,24 @@
 .contact{
-    padding:5em;
+    padding: 3em 5em;
 }
 
 .text-contact{
-    h3{
+    h3 {
         font-weight: 700;
+    }
+    h4 {
+        margin-bottom: 1.5em;
+    }
+    h2 {
+        font-weight: bold;
+        text-align: center;
     }
 }
 
 .mapouter{
     position:relative;
     text-align:right;
-    height: calc(70vh); 
+    height: 50vh; 
 }
     
 .gmap_canvas {
