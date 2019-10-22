@@ -25,7 +25,6 @@ function index(props) {
         md={{ span: 12 }}
         lg={{ span: 10 }}
         style={{
-          height: '100vh',
           overflow: 'auto',
           backgroundColor: 'rgba(145, 145, 145, .3)'
         }}
@@ -33,7 +32,7 @@ function index(props) {
         <Button type='link' icon='arrow-left' onClick={() => history.push('/home')} style={{ fontWeight: 500 }}>
           Trang chủ
         </Button>
-        <Row type='flex' justify='center' align='middle'>
+        <Row style={{ height: '90vh'}} type='flex' justify='center' align='middle'>
           <Col span={20}>
             {isLogin ? (
               <LoginForm switchRegisterForm={() => setIsLogin(false)} />

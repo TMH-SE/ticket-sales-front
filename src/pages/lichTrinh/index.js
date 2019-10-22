@@ -5,35 +5,38 @@ import './index.scss'
 const columns = [
   {
     title: 'Điểm đi',
-    dataIndex: 'diemdi'
+    dataIndex: 'diemDi',
+    key: 'diemDi'
   },
   {
     title: 'Điểm đến',
-    dataIndex: 'diemden'
+    dataIndex: 'diemDen',
+    key: 'diemDen'
+  },
+  {
+    title: 'Thời gian khởi hành',
+    dataIndex: 'thoiGianKhoiHanh',
+    key: 'thoiGianKhoiHanh'
   },
   {
     title: 'Loại xe',
-    dataIndex: 'loaixe'
+    dataIndex: 'loaiXe',
+    key: 'loaiXe'
   },
   {
     title: 'Quãng đường (km)',
-    dataIndex: 'quanduong'
+    dataIndex: 'quangDuong',
+    key: 'quangDuong'
   },
   {
     title: 'Thời gian',
-    dataIndex: 'thoigian'
-  },
-  {
-    title: 'Số chuyến/Ngày',
-    dataIndex: 'sochuyen'
+    dataIndex: 'thoiGian',
+    key: 'thoiGian'
   },
   {
     title: 'Giá vé (đ/vé)',
-    dataIndex: 'giave'
-  },
-  {
-    title: 'Giờ chạy',
-    dataIndex: 'giochay'
+    dataIndex: 'giaVe',
+    key: 'giaVe'
   },
   {
     title: 'Đặt Vé',
@@ -48,24 +51,24 @@ const tuyen = [
     title: 'TPHCM',
     data: [
       {
-        diemdi: 'TPHCM',
-        diemden: 'HN',
-        loaixe: 'Giường',
-        quanduong: '1030',
-        thoigian: '6h30',
-        sochuyen: '6',
-        giave: '300000',
-        giochay: '7h30'
+        id: 0,
+        diemDi: 'TPHCM',
+        diemDen: 'HN',
+        thoiGianKhoiHanh: '7h30',
+        loaiXe: 'Giường',
+        quangDuong: '1030',
+        thoiGian: '6h30',
+        giaVe: '300000'
       },
       {
-        diemdi: 'TPHCM',
-        diemden: 'HN',
-        loaixe: 'Giường',
-        quanduong: '1030',
-        thoigian: '6h30',
-        sochuyen: '6',
-        giave: '300000',
-        giochay: '7h30'
+        id: 1,
+        diemDi: 'TPHCM',
+        diemDen: 'HN',
+        thoiGianKhoiHanh: '8h30',
+        loaiXe: 'Giường',
+        quangDuong: '1030',
+        thoiGian: '6h30',
+        giaVe: '300000'
       }
     ]
   },
@@ -73,38 +76,44 @@ const tuyen = [
     title: 'Hà Nội',
     data: [
       {
-        diemdi: 'Hà Nội',
-        diemden: 'HN',
-        loaixe: 'Giường',
-        quanduong: '1030',
-        thoigian: '6h30',
-        sochuyen: '6',
-        giave: '300000',
-        giochay: '7h30'
+        id: 2,
+        diemDi: 'Hà Nội',
+        diemDen: 'TPHCM',
+        thoiGianKhoiHanh: '7h30',
+        loaiXe: 'Giường',
+        quangDuong: '1030',
+        thoiGian: '6h30',
+        giaVe: '300000'
       },
       {
-        diemdi: 'Hà Nội',
-        diemden: 'HN',
-        loaixe: 'Giường',
-        quanduong: '1030',
-        thoigian: '6h30',
-        sochuyen: '6',
-        giave: '300000',
-        giochay: '7h30'
+        id: 3,
+        diemDi: 'Hà Nội',
+        diemDen: 'TPHCM',
+        thoiGianKhoiHanh: '8h30',
+        loaiXe: 'Giường',
+        quangDuong: '1030',
+        thoiGian: '6h30',
+        giaVe: '300000'
       }
     ]
   }
 ]
 
-function index() {
+function index(props) {
+  const { isMobile } = props
   return (
     <div className='lichtrinh'>
-      {tuyen.map(item => (
-        <Row>
+      {tuyen.map((item, index) => (
+        <Row key={index}>
           <h3 style={{ fontWeight: '700', color: '#f00', marginTop: '.5em' }}>
             <Icon type='swap' /> {item.title}
           </h3>
-          <Table columns={columns} dataSource={item.data} />
+          <Table
+            rowKey={r => r.id}
+            scroll={{ x: isMobile }}
+            columns={columns}
+            dataSource={item.data}
+          />
           <hr />
         </Row>
       ))}

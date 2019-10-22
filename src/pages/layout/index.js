@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import {
   Layout,
   Menu,
@@ -182,7 +182,11 @@ function ClientLayout(props) {
             </Col>
           </Row>
         </Header>
-        <Content className='main-content'>{children}</Content>
+        <Content className='main-content'>
+          <Suspense fallback={null}>
+            {React.cloneElement(children, { isMobile })}
+          </Suspense>
+        </Content>
         <Footer>
           <div className='footer' id='footer'>
             <div className='container'>
@@ -234,7 +238,7 @@ function ClientLayout(props) {
       </Layout>
     </Layout>
   ) : (
-    <>{children}</>
+    <Suspense fallback={null}>{children}</Suspense>
   )
 }
 

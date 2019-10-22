@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy } from 'react'
 import { inject, observer } from 'mobx-react'
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import AdminLayout from './adminLayout'
@@ -17,9 +17,7 @@ function Root(props) {
             const Component = lazy(() => import(`./${router.component}`))
             return (
               <ClientLayout key={index} menuKey={router.key} {...props}>
-                <Suspense fallback={null}>
-                  <Component {...props} />
-                </Suspense>
+                <Component {...props} />
               </ClientLayout>
             )
           }}
