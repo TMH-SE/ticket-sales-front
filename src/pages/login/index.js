@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Button } from 'antd'
 import background from '../../assets/background_login1.jpg'
 import './index.scss'
 import LoginForm from './loginForm'
 import RegisterForm from './registerForm'
 
 function index(props) {
+  const { history } = props
   const [isLogin, setIsLogin] = useState(true)
 
   return (
@@ -16,22 +17,23 @@ function index(props) {
         backgroundSize: 'cover',
         height: '100vh'
       }}
+      type='flex'
+      justify='end'
     >
       <Col
-        xs={{ span: 0 }}
+        xs={{ span: 24 }}
         md={{ span: 12 }}
-        lg={{ span: 14 }}
+        lg={{ span: 10 }}
         style={{
-          height: '100vh'
+          height: '100vh',
+          overflow: 'auto',
+          backgroundColor: 'rgba(145, 145, 145, .3)'
         }}
-      />
-      <Col xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 10 }}>
-        <Row
-          type='flex'
-          style={{ height: '100vh', overflow: 'auto', backgroundColor: 'rgba(145, 145, 145, .3)' }}
-          justify='center'
-          align='middle'
-        >
+      >
+        <Button type='link' icon='arrow-left' onClick={() => history.push('/home')} style={{ fontWeight: 500 }}>
+          Trang chủ
+        </Button>
+        <Row type='flex' justify='center' align='middle'>
           <Col span={20}>
             {isLogin ? (
               <LoginForm switchRegisterForm={() => setIsLogin(false)} />

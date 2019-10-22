@@ -11,7 +11,7 @@ function RegisterForm(props) {
     }
   }
   return (
-    <Form {...formItemLayout} className='registerForm'>
+    <Form {...formItemLayout} colon={false} hideRequiredMark className='registerForm'>
       <h1 className='formTitle'>đăng ký ngay!</h1>
       <Form.Item className='form-item' label='Họ tên' hasFeedback>
         {getFieldDecorator('fullName', {
