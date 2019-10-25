@@ -7,7 +7,7 @@ import LoginForm from './loginForm'
 import RegisterForm from './registerForm'
 
 function index(props) {
-  const { history } = props
+  const { history, store } = props
   const [isLogin, setIsLogin] = useState(true)
 
   return (
@@ -35,7 +35,7 @@ function index(props) {
         <Row style={{ height: '90vh'}} type='flex' justify='center' align='middle'>
           <Col span={20}>
             {isLogin ? (
-              <LoginForm switchRegisterForm={() => setIsLogin(false)} />
+              <LoginForm history={history} store={store}  switchRegisterForm={() => setIsLogin(false)} />
             ) : (
               <RegisterForm switchLoginForm={() => setIsLogin(true)} />
             )}

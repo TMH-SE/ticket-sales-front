@@ -11,32 +11,62 @@ import {
   List,
   Drawer
 } from 'antd'
+import { useQuery } from '@apollo/react-hooks'
 import './index.scss'
 import { publicMenu } from '../../routers'
 import avt from '../../assets/avatar.png'
+import gql from 'graphql-tag'
+import { openNotificationWithIcon } from '../../components/notification'
+import ThongTinCaNhanForm from '../thongTinCaNhan'
 
 const { Header, Content, Sider, Footer } = Layout
+
+const GET_ME = gql`
+  query {
+    me {
+      hoTen
+      email
+      soCMND
+      soDienThoai
+      diaChi
+      tenDangNhap
+    }
+  }
+`
 
 function ClientLayout(props) {
   const { children, history, store, menuKey } = props
   const { onLogout, isAuth } = store
   const [isMobile, setIsMobile] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [visibleForm, setVisibleForm] = useState(false)
+  const { data } = useQuery(GET_ME, {
+    skip: !isAuth,
+    fetchPolicy: 'cache-and-network'
+  })
+
+  const fullName = data && data.me && data.me.hoTen
+
+  function logout() {
+    onLogout()
+    openNotificationWithIcon('success', 'Đăng xuất thành công', '')
+    history.push('/login')
+  }
 
   const info = (
     <Menu>
       <Menu.Item disabled key={1}>
         <Avatar src={avt} />
         <span style={{ color: '#000', fontWeight: 'bold', marginLeft: '1em' }}>
-          User
+          {isAuth && fullName}
         </span>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key={2}>
+      <Menu.Item onClick={() => setVisibleForm(true)} key={2}>
         <Icon type='user' />
         <span>Thông tin cá nhân</span>
       </Menu.Item>
-      <Menu.Item onClick={onLogout} key={3}>
+      <Menu.Item onClick={logout} key={3}>
         <Icon type='logout' />
         <span>Đăng xuất</span>
       </Menu.Item>
@@ -114,16 +144,16 @@ function ClientLayout(props) {
                                 marginLeft: '1em'
                               }}
                             >
-                              User
+                              {isAuth && fullName}
                             </span>
                           </span>
                         }
                       >
-                        <Menu.Item key={2}>
+                        <Menu.Item onClick={() => setVisibleForm(true)} key={2}>
                           <Icon type='user' />
                           <span>Thông tin cá nhân</span>
                         </Menu.Item>
-                        <Menu.Item onClick={onLogout} key={3}>
+                        <Menu.Item onClick={logout} key={3}>
                           <Icon type='logout' />
                           <span>Đăng xuất</span>
                         </Menu.Item>
@@ -236,6 +266,12 @@ function ClientLayout(props) {
           </div>
         </Footer>
       </Layout>
+      <ThongTinCaNhanForm
+        me={data && data.me}
+        isMobile={isMobile}
+        visibleForm={visibleForm}
+        closeForm={() => setVisibleForm(false)}
+      />
     </Layout>
   ) : (
     <Suspense fallback={null}>{children}</Suspense>

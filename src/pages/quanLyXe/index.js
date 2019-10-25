@@ -1,11 +1,7 @@
 import React from 'react'
 
 function index() {
-  return (
-    <div>
-      Quan ly xe
-    </div>
-  )
+  return <div>Quanr ly xe</div>
 }
 
 export default index

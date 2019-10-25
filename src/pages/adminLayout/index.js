@@ -3,7 +3,7 @@ import AdminPageHeader from '../adminPageHeader'
 
 function AdminLayout(props) {
   const { children, store, history } = props
-  const { onLogout, isAuth } = store
+  const { onLogout, isAdmin } = store
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function AdminLayout(props) {
       }}
     >
       <Suspense fallback={null}>
-      {isAuth ? <AdminPageHeader onLogout={onLogout} history={history} /> : null}
+      {isAdmin ? <AdminPageHeader onLogout={onLogout} history={history} /> : null}
       <div style={{ padding: '0 24px' }}>{children}</div>
       </Suspense>
     </div>

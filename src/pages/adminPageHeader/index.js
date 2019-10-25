@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { PageHeader, Icon, Divider, Dropdown, Menu, Avatar } from 'antd'
 import avt from '../../assets/avatar.png'
+import { openNotificationWithIcon } from '../../components/notification'
 
 const GET_ME = gql`
   query {
@@ -28,7 +29,13 @@ function AdminPageHeader(props) {
         <Icon type='user' />
         <span>Thông tin cá nhân</span>
       </Menu.Item>
-      <Menu.Item onClick={onLogout}>
+      <Menu.Item
+        onClick={() => {
+          onLogout()
+          openNotificationWithIcon('success', 'Đăng xuất thành công', '')
+          history.push('/admin/login')
+        }}
+      >
         <Icon type='logout' />
         <span>Đăng xuất</span>
       </Menu.Item>

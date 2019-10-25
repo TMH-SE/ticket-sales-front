@@ -34,11 +34,23 @@ function index(props) {
             }
           })
           const { token, isAdmin } = data.login
-          onLogin(token, isAdmin)
-          openNotificationWithIcon('success', 'Đăng nhập thành công', '')
-          history.push('/admin/dashboard')
+          if (isAdmin) {
+            onLogin(token, isAdmin)
+            openNotificationWithIcon('success', 'Đăng nhập thành công', '')
+            history.push('/admin/dashboard')
+          } else {
+            openNotificationWithIcon(
+              'error',
+              'Đăng nhập thất bại',
+              ''
+            )
+          }
         } catch (error) {
-          openNotificationWithIcon('error', 'Đăng nhập thất bại', 'Tên đăng nhập hoặc mật khẩu không đúng')
+          openNotificationWithIcon(
+            'error',
+            'Đăng nhập thất bại',
+            'Tên đăng nhập hoặc mật khẩu không đúng'
+          )
         }
       }
     })
