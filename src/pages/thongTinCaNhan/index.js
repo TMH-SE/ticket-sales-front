@@ -1,17 +1,57 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Drawer, Button, Form, Input, Avatar, Row, Col } from 'antd'
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks'
 import avt from '../../assets/avatar.png'
+import { openNotificationWithIcon } from '../../components/notification'
+
+const CAP_NHAT_THONG_TIN = gql`
+  mutation capNhatThongTin($input: NguoiDungInput!) {
+    capNhatThongTin(input: $input)
+  }
+`
 
 function ThongTinCaNhanForm(props) {
-  const { visibleForm, closeForm, isMobile, me, form } = props
-  const { getFieldDecorator } = form
-  const [changed, setChanged] = useState(true)
+  const { visibleForm, closeForm, isMobile, refetchData, me, form } = props
+  const { getFieldDecorator, validateFields } = form
+
+  const [capNhatThongTin] = useMutation(CAP_NHAT_THONG_TIN)
+
   const formItemLayout = {
     wrapperCol: {
       xs: { span: 24 },
       sm: { span: 24 }
     }
   }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    validateFields(async (err, values) => {
+      if (!err) {
+        const { hoTen, email, soCMND, soDienThoai, diaChi } = values
+
+        const { errors } = await capNhatThongTin({
+          variables: {
+            input: {
+              hoTen,
+              email,
+              soDienThoai,
+              soCMND,
+              diaChi
+            }
+          }
+        })
+        if (errors) {
+          openNotificationWithIcon('error', errors.message)
+        } else {
+          openNotificationWithIcon('success', 'Cập nhật thông tin thành công')
+          refetchData()
+          closeForm()
+        }
+      }
+    })
+  }
+
   return (
     <Drawer
       width={isMobile ? '100%' : '50%'}
@@ -30,7 +70,7 @@ function ThongTinCaNhanForm(props) {
       onClose={() => closeForm()}
     >
       <Form
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         {...formItemLayout}
         colon={false}
         hideRequiredMark
@@ -45,7 +85,7 @@ function ThongTinCaNhanForm(props) {
                 message: 'Vui lòng nhập họ tên của bạn!'
               }
             ]
-          })(<Input disabled={changed} />)}
+          })(<Input />)}
         </Form.Item>
         <Form.Item className='form-item' label='Số CMND' hasFeedback>
           {getFieldDecorator('soCMND', {
@@ -60,7 +100,7 @@ function ThongTinCaNhanForm(props) {
                 message: 'Vui lòng nhập số CMND của bạn!'
               }
             ]
-          })(<Input disabled={changed} />)}
+          })(<Input />)}
         </Form.Item>
         <Form.Item className='form-item' label='Địa chỉ' hasFeedback>
           {getFieldDecorator('diaChi', {
@@ -71,7 +111,7 @@ function ThongTinCaNhanForm(props) {
                 message: 'Vui lòng nhập địa chỉ của bạn!'
               }
             ]
-          })(<Input disabled={changed} />)}
+          })(<Input />)}
         </Form.Item>
         <Form.Item className='form-item' label='Số điện thoại' hasFeedback>
           {getFieldDecorator('soDienThoai', {
@@ -86,7 +126,7 @@ function ThongTinCaNhanForm(props) {
                 message: 'Vui lòng nhập số điện thoại của bạn!'
               }
             ]
-          })(<Input disabled={changed} />)}
+          })(<Input />)}
         </Form.Item>
         <Form.Item className='form-item' label='Email' hasFeedback>
           {getFieldDecorator('email', {
@@ -101,48 +141,23 @@ function ThongTinCaNhanForm(props) {
                 message: 'Vui lòng nhập email của bạn!'
               }
             ]
-          })(<Input disabled={changed} />)}
+          })(<Input />)}
         </Form.Item>
-        <Form.Item className='form-item' label='Tên đăng nhập' hasFeedback>
+        <Form.Item className='form-item' label='Tên đăng nhập'>
           {getFieldDecorator('tenDangNhap', {
-            initialValue: me && me.tenDangNhap,
-            rules: [
-              {
-                pattern: /^[a-z]\w{3,}$/,
-                message:
-                  'Tên đăng nhập bắt đầu bằng chữ, chỉ chứa chữ thường, số, kí tự (_) và có độ dài tối thiểu 4 kí tự'
-              },
-              {
-                required: true,
-                message: 'Vui lòng nhập tên đăng nhập!'
-              }
-            ]
-          })(<Input disabled={changed} />)}
-        </Form.Item>
-        <Form.Item className='form-item' label='Mật khẩu' hasFeedback>
-          {getFieldDecorator('matKhau', {
-            rules: [
-              {
-                min: 8,
-                message: 'Mật khẩu có độ dài tối thiểu 8 kí tự'
-              },
-              {
-                required: true,
-                message: 'Vui lòng nhập mật khẩu!'
-              }
-            ]
-          })(<Input.Password disabled={changed} />)}
+            initialValue: me && me.tenDangNhap
+          })(<Input disabled />)}
         </Form.Item>
         <Form.Item>
           <Row type='flex' justify='space-around'>
             <Col span={10}>
-              <Button block type='danger'>
+              <Button onClick={() => closeForm()} block type='danger'>
                 Hủy
               </Button>
             </Col>
             <Col span={10}>
-              <Button onClick={() => setChanged(!changed)} block htmlType='submit' type='primary'>
-                {changed ? 'Sửa thông tin' : 'Lưu thay đổi'}
+              <Button block htmlType='submit' type='primary'>
+                Cập nhật thông tin
               </Button>
             </Col>
           </Row>

@@ -18,6 +18,7 @@ import avt from '../../assets/avatar.png'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
 import ThongTinCaNhanForm from '../thongTinCaNhan'
+import DoiMatKhau from '../doiMatKhau'
 
 const { Header, Content, Sider, Footer } = Layout
 
@@ -40,7 +41,8 @@ function ClientLayout(props) {
   const [isMobile, setIsMobile] = useState(false)
   const [visible, setVisible] = useState(false)
   const [visibleForm, setVisibleForm] = useState(false)
-  const { data } = useQuery(GET_ME, {
+  const [visiblePassForm, setVisiblePassForm] = useState(false)
+  const { data, refetch } = useQuery(GET_ME, {
     skip: !isAuth,
     fetchPolicy: 'cache-and-network'
   })
@@ -65,6 +67,10 @@ function ClientLayout(props) {
       <Menu.Item onClick={() => setVisibleForm(true)} key={2}>
         <Icon type='user' />
         <span>Thông tin cá nhân</span>
+      </Menu.Item>
+      <Menu.Item onClick={() => setVisiblePassForm(true)} key={4}>
+        <Icon type='key' />
+        <span>Đổi mật khẩu</span>
       </Menu.Item>
       <Menu.Item onClick={logout} key={3}>
         <Icon type='logout' />
@@ -152,6 +158,10 @@ function ClientLayout(props) {
                         <Menu.Item onClick={() => setVisibleForm(true)} key={2}>
                           <Icon type='user' />
                           <span>Thông tin cá nhân</span>
+                        </Menu.Item>
+                        <Menu.Item onClick={() => setVisiblePassForm(true)} key={4}>
+                          <Icon type='key' />
+                          <span>Đổi mật khẩu</span>
                         </Menu.Item>
                         <Menu.Item onClick={logout} key={3}>
                           <Icon type='logout' />
@@ -270,8 +280,10 @@ function ClientLayout(props) {
         me={data && data.me}
         isMobile={isMobile}
         visibleForm={visibleForm}
+        refetchData={() => refetch()}
         closeForm={() => setVisibleForm(false)}
       />
+      <DoiMatKhau visiblePassForm={visiblePassForm} closePassForm={() => setVisiblePassForm(false)} />
     </Layout>
   ) : (
     <Suspense fallback={null}>{children}</Suspense>

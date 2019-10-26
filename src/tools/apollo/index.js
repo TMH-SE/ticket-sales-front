@@ -40,13 +40,9 @@ const splitLink = split(
   httpLink
 )
 
-const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}, Code: ${extensions.code}`
-      )
-    })
+    response.errors = graphQLErrors[0]
   }
   if (networkError) {
     console.log(

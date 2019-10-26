@@ -24,7 +24,7 @@ function RegisterForm(props) {
     e.preventDefault()
     validateFields(async (err, values) => {
       if (!err) {
-        const { data } = await dangKyTaiKhoan({
+        const { errors } = await dangKyTaiKhoan({
           variables: {
             input: {
               hoTen: values.hoTen,
@@ -37,9 +37,11 @@ function RegisterForm(props) {
             }
           }
         })
-        if (data) {
+        if (!errors) {
           openNotificationWithIcon('success', 'Đăng ký tài khoản thành công')
           switchLoginForm()
+        } else {
+          openNotificationWithIcon('error', errors.message)
         }
       }
     })

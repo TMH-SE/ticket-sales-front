@@ -15,5 +15,13 @@ code {
 }
 
 .btnSuccess {
-  background-color: green;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.btnSuccess:hover {
+  background-color: #2DC150 !important;
+  border-color: #2DC150 !important;
+  color: #fff !important;
+  opacity: .9;
 }
