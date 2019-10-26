@@ -23,9 +23,7 @@
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
-    "subscriptions-transport-ws": "^0.9.16",
-    "babel-preset-mobx": "^2.0.0",
-    "node-sass": "^4.12.0"
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -47,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-preset-mobx": "^2.0.0",
+    "node-sass": "^4.12.0",
+    "gulp-sass": "^3.1.0"
   }
 }
