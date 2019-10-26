@@ -21,5 +21,6 @@ deployBackToAWS:
     - npm rebuild node-sass
     - npm run build
     - ls
+    - ssh -o "StrictHostKeyChecking=no" ec2-user@3.229.129.81 'rm -rf /home/ec2-user/ticket-sales-front/build/'
     - scp -i ~/.ssh/id_rsa -o "StrictHostKeyChecking=no" -r ./build/ ec2-user@3.229.129.81:/home/ec2-user/ticket-sales-front/
     - bash deploy/deploy.sh

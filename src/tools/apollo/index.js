@@ -7,7 +7,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
-const protocol = window.location.protocol
+const protocol = 'http:'
 const host = window.location.hostname
 const port = process.env.REACT_APP_BE_PORT
 const endpoint = 'ticketgraphql'
