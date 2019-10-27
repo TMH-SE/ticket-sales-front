@@ -1,6 +1,10 @@
 import React from 'react'
 import { Row, Table, Button, Icon } from 'antd'
+import { Link } from 'react-router-dom'
 import './index.scss'
+
+
+
 
 const columns = [
   {
@@ -42,7 +46,26 @@ const columns = [
     title: 'Đặt Vé',
     dataIndex: '',
     key: 'x',
-    render: () => <Button type='danger'>Đặt Vé</Button>
+    render: (t, r) => {
+      const { diemDi, diemDen, quangDuong, thoiGian, thoiGianKhoiHanh, giaVe, id, loaiXe } = r
+      return (
+        <Link to={
+          {
+            pathname: "/datVe",
+            data: {
+              diemDi: diemDi,
+              diemDen: diemDen,
+              quangDuong: quangDuong,
+              thoiGian: thoiGian,
+              thoiGianKhoiHanh: thoiGianKhoiHanh,
+              giaVe: giaVe,
+              id: id,
+              loaiXe: loaiXe
+            }
+          }
+        } > Đặt vé</Link >
+      )
+    }
   }
 ]
 
@@ -99,8 +122,12 @@ const tuyen = [
   }
 ]
 
+const expandedRowKeys = Table
+
 function index(props) {
-  const { isMobile } = props
+  const { isMobile, history } = props
+
+
   return (
     <div className='lichtrinh'>
       {tuyen.map((item, index) => (
