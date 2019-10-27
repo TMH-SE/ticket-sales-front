@@ -15,7 +15,7 @@ const endpoint = 'ticketgraphql'
 const urn = process.env.REACT_APP_BE_URN || `${host}${port ? `:${port}` : ''}/${endpoint}`
 
 const httpLink = new HttpLink({
-  uri: `http://${urn}`
+  uri: `${protocol}//${urn}`
 })
 
 const wsLink = new WebSocketLink({
