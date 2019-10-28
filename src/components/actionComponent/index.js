@@ -1,5 +1,6 @@
-import React from 'react'
 import { Button, Popconfirm } from 'antd'
+
+import React from 'react'
 
 function ActionComponent(props) {
   const { updateData, confirm } = props

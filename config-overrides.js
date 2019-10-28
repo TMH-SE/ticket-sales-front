@@ -2,8 +2,11 @@ const {
   override,
   disableEsLint,
   addDecoratorsLegacy,
-  fixBabelImports
+  fixBabelImports,
+  addWebpackPlugin
 } = require('customize-cra')
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = override(
   disableEsLint(),
@@ -11,6 +14,11 @@ module.exports = override(
   fixBabelImports('import', {
     libraryName: 'antd',
     libraryDirectory: 'es',
-    style: 'css'
-  })
+    style: true
+  }),
+  addWebpackPlugin(
+    new MiniCssExtractPlugin({
+      ignoreOrder: false
+    })
+  )
 )

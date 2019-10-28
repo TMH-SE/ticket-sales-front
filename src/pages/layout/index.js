@@ -1,24 +1,26 @@
-import React, { useState, Suspense } from 'react'
-import {
-  Layout,
-  Menu,
-  Icon,
-  Button,
-  Row,
-  Dropdown,
-  Avatar,
-  Col,
-  List,
-  Drawer
-} from 'antd'
-import { useQuery } from '@apollo/react-hooks'
 import './index.scss'
-import { publicMenu } from '../../routers'
+
+import {
+  Avatar,
+  Button,
+  Col,
+  Drawer,
+  Dropdown,
+  Icon,
+  Layout,
+  List,
+  Menu,
+  Row
+} from 'antd'
+import React, { Suspense, useState } from 'react'
+
+import DoiMatKhau from '../doiMatKhau'
+import ThongTinCaNhanForm from '../thongTinCaNhan'
 import avt from '../../assets/avatar.png'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
-import ThongTinCaNhanForm from '../thongTinCaNhan'
-import DoiMatKhau from '../doiMatKhau'
+import { publicMenu } from '../../routers'
+import { useQuery } from '@apollo/react-hooks'
 
 const { Header, Content, Sider, Footer } = Layout
 

@@ -1,11 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react'
-import { Row, Button, Table, Col } from 'antd'
+
 import './index.scss'
+
+import { Button, Col, Row, Table } from 'antd'
+import React, { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+
 import ActionComponent from '../../components/actionComponent'
 import QuanLyXeForm from './quanLyXeForm'
 import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks'
 import { openNotificationWithIcon } from '../../components/notification'
 
 const GET_ALL_XE = gql`

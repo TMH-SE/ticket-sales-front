@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+
+import './index.scss'
+
+import { Button, Col, Row, Table } from 'antd'
 import React, { useState } from 'react'
-import { Row, Button, Table, Col } from 'antd'
+import { convertTimeStamp, minutesToHours } from '../../utils/convertTime'
+
+import ActionComponent from '../../components/actionComponent'
+import QuanLyChuyenForm from './quanLyChuyenForm'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import './index.scss'
-import ActionComponent from '../../components/actionComponent'
-import { minutesToHours, convertTimeStamp } from '../../utils/convertTime'
-import QuanLyChuyenForm from './quanLyChuyenForm'
 
 const GET_ALL_CHUYEN = gql`
   query getAllChuyen {

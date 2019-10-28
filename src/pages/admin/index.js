@@ -1,5 +1,5 @@
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import React, { lazy } from 'react'
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 function Admin(props) {
   const { store } = props

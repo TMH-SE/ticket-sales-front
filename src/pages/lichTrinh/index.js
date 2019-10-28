@@ -1,10 +1,9 @@
-import React from 'react'
-import { Row, Table, Button, Icon } from 'antd'
-import { Link } from 'react-router-dom'
 import './index.scss'
 
+import { Button, Icon, Row, Table } from 'antd'
 
-
+import { Link } from 'react-router-dom'
+import React from 'react'
 
 const columns = [
   {

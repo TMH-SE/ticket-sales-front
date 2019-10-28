@@ -1,8 +1,9 @@
+import { Button, Form, Input } from 'antd'
+
 import React from 'react'
-import { Form, Input, Button } from 'antd'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
 import { openNotificationWithIcon } from '../../components/notification'
+import { useMutation } from '@apollo/react-hooks'
 
 const DANG_KY_TAI_KHOAN = gql`
   mutation dangKyTaiKhoan($input: NguoiDungInput!) {

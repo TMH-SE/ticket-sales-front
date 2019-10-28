@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
-import { Steps, Button, message, Input, Form, Row, Col, Select, InputNumber, DatePicker, Table, Icon, Checkbox, Typography, Radio } from 'antd';
-
+/* eslint-disable react-hooks/rules-of-hooks */
 
 import './index.scss'
 
+import {
+  Button,
+  Col,
+  DatePicker,
+  Icon,
+  Input,
+  InputNumber,
+  Radio,
+  Row,
+  Select,
+  Steps,
+  Table,
+} from 'antd'
+import React, { useState } from 'react'
+
 const { Step } = Steps
 const { Option } = Select
-const { Title } = Typography
-
-
 
 function index(props) {
   const { form, isMobile, history } = props
@@ -54,12 +64,15 @@ function index(props) {
       title: 'Đặt Vé',
       dataIndex: '',
       key: 'x',
-      render: () => <Button type="danger" onClick={next}>Đặt</Button>
+      render: () => (
+        <Button type='danger' onClick={next}>
+          Đặt
+        </Button>
+      )
     }
   ]
 
-  const tuyen =
-  {
+  const tuyen = {
     title: 'TPHCM',
     data: [
       {
@@ -87,12 +100,18 @@ function index(props) {
   const steps = [
     {
       title: 'Tìm Tuyến',
-      content:
+      content: (
         <div>
           <Row>
             <Col lg={7} md={7} sm={24} xs={24}>
-              <h2 style={{ color: 'red', marginBottom: '2em' }}>Chọn Thông Tin</h2>
-              <Row style={{ marginTop: '1em' }} type='flex' justify='space-between'>
+              <h2 style={{ color: 'red', marginBottom: '2em' }}>
+                Chọn Thông Tin
+              </h2>
+              <Row
+                style={{ marginTop: '1em' }}
+                type='flex'
+                justify='space-between'
+              >
                 <Select style={{ width: '49%' }} placeholder='Điểm đi'>
                   <Option value='Phú Yên'>Phú Yên</Option>
                   <Option value='HCM'>HCM</Option>
@@ -104,19 +123,35 @@ function index(props) {
                   <Option value='Hà Nội'>Hà Nội</Option>
                 </Select>
               </Row>
-              <Row style={{ marginTop: '1em' }} type='flex' justify='space-between'>
-                <DatePicker placeholder='Ngày khởi hành' style={{ width: '49%' }} format={'YYYY/MM/DD'} />
+              <Row
+                style={{ marginTop: '1em' }}
+                type='flex'
+                justify='space-between'
+              >
+                <DatePicker
+                  placeholder='Ngày khởi hành'
+                  style={{ width: '49%' }}
+                  format={'YYYY/MM/DD'}
+                />
                 <InputNumber placeholder='Số lượng' style={{ width: '49%' }} />
               </Row>
               <Row style={{ marginTop: '1em' }}>
-                <Button type='danger' block>Tìm</Button>
+                <Button type='danger' block>
+                  Tìm
+                </Button>
               </Row>
             </Col>
             <Col lg={1} md={1} sm={1} xs={1} />
             <Col lg={16} md={16} sm={24} xs={24}>
               {
                 <Row key={tuyen.title}>
-                  <h3 style={{ fontWeight: '700', color: '#f00', marginTop: '.5em' }}>
+                  <h3
+                    style={{
+                      fontWeight: '700',
+                      color: '#f00',
+                      marginTop: '.5em'
+                    }}
+                  >
                     <Icon type='swap' /> {tuyen.title}
                   </h3>
                   <Table
@@ -131,15 +166,17 @@ function index(props) {
             </Col>
           </Row>
         </div>
-      ,
+      )
     },
     {
       title: 'Nhập Thông Tin',
-      content:
+      content: (
         <div>
           <Row>
             <Col lg={24} md={24} sm={24} xs={24}>
-              <h2 style={{ float: 'left', fontWeight: '700' }}>NHẬP THÔNG TIN KHÁCH HÀNG</h2>
+              <h2 style={{ float: 'left', fontWeight: '700' }}>
+                NHẬP THÔNG TIN KHÁCH HÀNG
+              </h2>
             </Col>
             <Col lg={10} md={10} sm={24} xs={24}>
               <Row style={{ textAlign: 'left' }}>
@@ -186,39 +223,49 @@ function index(props) {
               </Row>
             </Col>
           </Row>
-        </div>,
+        </div>
+      )
     },
     {
       title: 'Thanh Toán',
-      content:
+      content: (
         <div>
-          <Row >
-            <Col >
+          <Row>
+            <Col>
               <Radio.Group style={{ width: '100%' }}>
-                <Radio value={1} style={{ height: '30px', lineHeight: '30px', margin: '1em' }}>
-                  <Icon type="dollar" style={{ fontSize: '32px' }} />
+                <Radio
+                  value={1}
+                  style={{ height: '30px', lineHeight: '30px', margin: '1em' }}
+                >
+                  <Icon type='dollar' style={{ fontSize: '32px' }} />
                   <h2>THANH TOÁN TRỰC TIẾP </h2>
                 </Radio>
-                <Radio value={2} style={{ height: '30px', lineHeight: '30px', margin: '1em' }}>
-                  <Icon type="bank" style={{ fontSize: '32px' }} />
+                <Radio
+                  value={2}
+                  style={{ height: '30px', lineHeight: '30px', margin: '1em' }}
+                >
+                  <Icon type='bank' style={{ fontSize: '32px' }} />
                   <h2>THANH TOÁN CHUYỂN KHOẢN </h2>
                 </Radio>
               </Radio.Group>
             </Col>
           </Row>
-        </div>,
+        </div>
+      )
     },
     {
       title: 'Đặt Vé Thành Công',
-      content:
+      content: (
         <div>
-          <Icon type="check-circle" style={{ color: 'green', fontSize: '15em', marginTop: '10px' }} />
+          <Icon
+            type='check-circle'
+            style={{ color: 'green', fontSize: '15em', marginTop: '10px' }}
+          />
           <h2 style={{ margin: '2em' }}>Bạn đã đặt vé thành công !</h2>
         </div>
+      )
     }
-  ];
-
-
+  ]
 
   function next() {
     const next = current + 1
@@ -229,26 +276,22 @@ function index(props) {
     setCurrent(prev)
   }
 
-
   function findRoute(e) {
     e.preventDefault()
-
   }
 
-
-
   return (
-    <div className="datVe">
+    <div className='datVe'>
       <div>
         <Steps current={current}>
           {steps.map(item => (
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className="steps-content">{steps[current].content}</div>
-        <div className="steps-action">
+        <div className='steps-content'>{steps[current].content}</div>
+        <div className='steps-action'>
           {current < steps.length - 1 && current > 0 && (
-            <Button type="primary" onClick={() => next()}>
+            <Button type='primary' onClick={() => next()}>
               Tiếp theo
             </Button>
           )}

@@ -1,8 +1,9 @@
+import { Button, Form, Input, Modal } from 'antd'
+
 import React from 'react'
-import { Modal, Form, Button, Input } from 'antd'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
 import { openNotificationWithIcon } from '../../components/notification'
+import { useMutation } from '@apollo/react-hooks'
 
 const DOI_MAT_KHAU = gql`
   mutation doiMatKhau($oldPassword: String!, $newPassword: String!) {

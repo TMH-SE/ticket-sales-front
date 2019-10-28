@@ -1,9 +1,10 @@
+import { DatePicker, Form, Modal, Select, TimePicker } from 'antd'
+import { convertTimeStamp, covertTimeStamp } from '../../utils/convertTime'
+
 import React from 'react'
-import { Form, Modal, Select, DatePicker, TimePicker } from 'antd'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import moment from 'moment'
-import { covertTimeStamp, convertTimeStamp } from '../../utils/convertTime'
+import { useQuery } from '@apollo/react-hooks'
 
 const GET_ALL_TUYEN = gql`
   query getAllTuyen {

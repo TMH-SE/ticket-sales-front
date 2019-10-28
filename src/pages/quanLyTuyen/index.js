@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react'
-import { Row, Button, Table, Col } from 'antd'
+
 import './index.scss'
+
+import { Button, Col, Row, Table } from 'antd'
+import React, { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+
 import ActionComponent from '../../components/actionComponent'
-import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { minutesToHours } from '../../utils/convertTime'
 import QuanLyTuyenForm from './quanLyTuyenForm'
+import gql from 'graphql-tag'
+import { minutesToHours } from '../../utils/convertTime'
 import { openNotificationWithIcon } from '../../components/notification'
 
 const GET_ALL_TUYEN = gql`

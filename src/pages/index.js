@@ -1,6 +1,7 @@
 import React, { lazy } from 'react'
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
+
 import AdminLayout from './adminLayout'
 import ClientLayout from './layout'
 import { publicRouters } from '../routers'

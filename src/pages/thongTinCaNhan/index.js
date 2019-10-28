@@ -1,9 +1,10 @@
+import { Avatar, Button, Col, Drawer, Form, Input, Row } from 'antd'
+
 import React from 'react'
-import { Drawer, Button, Form, Input, Avatar, Row, Col } from 'antd'
-import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
 import avt from '../../assets/avatar.png'
+import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
+import { useMutation } from '@apollo/react-hooks'
 
 const CAP_NHAT_THONG_TIN = gql`
   mutation capNhatThongTin($input: NguoiDungInput!) {

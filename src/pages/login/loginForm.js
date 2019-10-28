@@ -1,7 +1,8 @@
+import { Button, Form, Icon, Input } from 'antd'
+
 import React from 'react'
-import { Form, Input, Icon, Button } from 'antd'
-import { openNotificationWithIcon } from '../../components/notification'
 import gql from 'graphql-tag'
+import { openNotificationWithIcon } from '../../components/notification'
 import { useMutation } from '@apollo/react-hooks'
 
 const LOGIN = gql`

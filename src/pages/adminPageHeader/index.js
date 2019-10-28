@@ -1,9 +1,10 @@
+import { Avatar, Divider, Dropdown, Icon, Menu, PageHeader } from 'antd'
+
 import React from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import { PageHeader, Icon, Divider, Dropdown, Menu, Avatar } from 'antd'
 import avt from '../../assets/avatar.png'
+import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
+import { useQuery } from '@apollo/react-hooks'
 
 const GET_ME = gql`
   query {

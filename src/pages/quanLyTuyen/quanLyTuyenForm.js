@@ -1,9 +1,10 @@
+import { Form, Input, InputNumber, Modal } from 'antd'
+import { hourToMinute, minutesToHours } from '../../utils/convertTime'
+
 import React from 'react'
-import { Modal, Form, Input, InputNumber } from 'antd'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
 import { openNotificationWithIcon } from '../../components/notification'
-import { minutesToHours, hourToMinute } from '../../utils/convertTime'
+import { useMutation } from '@apollo/react-hooks'
 
 const THEM_TUYEN = gql`
   mutation themTuyen($input: TuyenXeInput!) {

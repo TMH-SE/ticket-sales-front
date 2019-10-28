@@ -1,7 +1,8 @@
-import React from 'react'
-import { Form, Row, Col, Select, InputNumber, DatePicker, Button } from 'antd'
-
 import './index.scss'
+
+import { Button, Col, DatePicker, Form, InputNumber, Row, Select } from 'antd'
+
+import React from 'react'
 
 const { Option } = Select
 

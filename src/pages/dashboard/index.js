@@ -1,6 +1,7 @@
-import React from 'react'
-import { List, Card, Avatar } from 'antd'
+import { Avatar, Card, List } from 'antd'
+
 import { Link } from 'react-router-dom'
+import React from 'react'
 import { adminMenu } from '../../routers'
 
 function index() {

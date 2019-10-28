@@ -1,9 +1,9 @@
-import React from 'react'
-import { Form, Row, Col, Select, InputNumber, DatePicker, Button } from 'antd'
-import SearchRouteForm from './formSearchRoute'
-
-
 import './index.scss'
+
+import { Button, Col, DatePicker, Form, InputNumber, Row, Select } from 'antd'
+
+import React from 'react'
+import SearchRouteForm from './formSearchRoute'
 
 function index(props) {
   const { history, store } = props

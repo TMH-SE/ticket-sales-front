@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react'
-import { Row, Col, Button } from 'antd'
-import background from '../../assets/background_login1.jpg'
+
 import './index.scss'
+
+import { Button, Col, Row } from 'antd'
+import React, { useState } from 'react'
+
 import LoginForm from './loginForm'
 import RegisterForm from './registerForm'
+import background from '../../assets/background_login1.jpg'
 
 function index(props) {
   const { history, store } = props

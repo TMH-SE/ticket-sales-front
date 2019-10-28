@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react'
-import { Row, Col, Button, Form, Input, Icon } from 'antd'
-import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
-import { openNotificationWithIcon } from '../../components/notification'
+
 import './index.scss'
+
+import { Button, Col, Form, Icon, Input, Row } from 'antd'
+
+import React from 'react'
+import gql from 'graphql-tag'
+import { openNotificationWithIcon } from '../../components/notification'
+import { useMutation } from '@apollo/react-hooks'
 
 const LOGIN = gql`
   mutation($username: String!, $password: String!) {
