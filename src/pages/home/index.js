@@ -1,11 +1,12 @@
 import React from 'react'
-import { Row, Col, Select, InputNumber, DatePicker, Button } from 'antd'
+import { Form, Row, Col, Select, InputNumber, DatePicker, Button } from 'antd'
+import SearchRouteForm from './formSearchRoute'
+
 
 import './index.scss'
 
-const { Option } = Select
-
-function index() {
+function index(props) {
+  const { history, store } = props
   return (
     <Row type='flex' align='middle' className='home-container'>
       <Col
@@ -15,29 +16,7 @@ function index() {
       >
         <h2 className='form-title'>Chọn tuyến</h2>
         <Row type='flex' justify='space-between'>
-          <Select style={{ width: '49%' }} placeholder='Điểm đi'>
-            <Option value='jack'>Jack</Option>
-            <Option value='lucy'>Lucy</Option>
-            <Option value='disabled' disabled>
-              Disabled
-            </Option>
-            <Option value='Yiminghe'>yiminghe</Option>
-          </Select>
-          <Select style={{ width: '49%' }} placeholder='Điểm đến'>
-            <Option value='jack'>Jack</Option>
-            <Option value='lucy'>Lucy</Option>
-            <Option value='disabled' disabled>
-              Disabled
-            </Option>
-            <Option value='Yiminghe'>yiminghe</Option>
-          </Select>
-        </Row>
-        <Row style={{ marginTop: '1em' }} type='flex' justify='space-between'>
-          <DatePicker placeholder='Ngày khởi hành' style={{ width: '49%' }} />
-          <InputNumber placeholder='Số lượng' style={{ width: '49%' }} />
-        </Row>
-        <Row style={{ marginTop: '1em' }}>
-          <Button type='danger' block>Đặt vé</Button>
+          <SearchRouteForm history={history} store={store} />
         </Row>
       </Col>
     </Row>
