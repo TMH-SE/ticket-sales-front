@@ -70,7 +70,7 @@ function SearchRouteForm(props) {
                                 message: 'Vui lòng chọn ngày khởi hành'
                             }
                         ]
-                    })(<DatePicker placeholder='Ngày khởi hành' style={{ width: '49%' }} />)}
+                    })(<DatePicker placeholder='Ngày khởi hành' style={{ width: '49%' }} format={'YYYY/MM/DD'} />)}
                     {getFieldDecorator('soluong', {
                         rules: [
                             {

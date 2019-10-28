@@ -122,10 +122,9 @@ const tuyen = [
   }
 ]
 
-const expandedRowKeys = Table
 
 function index(props) {
-  const { isMobile, history } = props
+  const { isMobile } = props
 
 
   return (
