@@ -68,7 +68,7 @@ function index() {
       key: 'thoiGian',
       render: t => {
         const time = minutesToHours(t)
-        return <span>{`${time.hour}h${time.minute}`}</span>
+        return <span>{`${time.hour}h${time.minute}'`}</span>
       }
     },
     {

@@ -12,3 +12,11 @@ export const hourToMinute = (h, m) => {
   let minutes = h * 60 + m
   return minutes
 }
+
+export const convertTimeStamp = timestamp => {
+  const date = new Date(timestamp).getDate()
+  const month = new Date(timestamp).getMonth() + 1
+  const year = new Date(timestamp).getFullYear()
+  const time = new Date(timestamp).toTimeString().split(' ')[0]
+  return `${year}-${month}-${date} ${time}`
+}
