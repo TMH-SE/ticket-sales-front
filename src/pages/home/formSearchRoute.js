@@ -1,92 +1,170 @@
 import './index.scss'
 
-import { Button, Col, DatePicker, Form, InputNumber, Row, Select } from 'antd'
+import { Button, DatePicker, Form, InputNumber, Select } from 'antd'
 
 import React from 'react'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 
 const { Option } = Select
 
-function SearchRouteForm(props) {
-    const { form, history } = props
-    const { getFieldDecorator, validateFields } = form
-
-    function searchRoute(e) {
-        e.preventDefault()
-        validateFields(async (err, values) => {
-            if (!err) {
-                try {
-                    const { diemdi, diemden, ngaykhoihanh, soluong } = values
-                    history.push({
-                        pathname: '/datVe',
-                        data: {
-                            diemdi: diemdi,
-                            diemden: diemden,
-                            ngaykhoihanh: ngaykhoihanh,
-                            soluong: soluong
-                        }
-                    })
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-        })
+const GET_ALL_TUYEN = gql`
+  query getAllTuyen {
+    getAllTuyen {
+      id
+      diemDi
+      diemDen
+      quangDuong
+      thoiGian
+      giaVe
+      trangThai
     }
+  }
+`
 
-    return (
-        <Form className='formSearchRouteHome' onSubmit={searchRoute}>
-            <Form.Item>
-                <Row style={{ marginTop: '1em' }} type='flex' justify='space-between'>
-                    {getFieldDecorator('diemdi', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Vui lòng chọn điểm đi !'
-                            }
-                        ]
-                    })(<Select style={{ width: '49%' }} placeholder='Điểm đi'>
-                        <Option value='Phú Yên'>Phú Yên</Option>
-                        <Option value='HCM'>HCM</Option>
-                        <Option value='Hà Nội'>Hà Nội</Option>
-                    </Select>)}
-                    {getFieldDecorator('diemden', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Vui lòng chọn điểm đến !'
-                            }
-                        ]
-                    })(<Select style={{ width: '49%' }} placeholder='Điểm đến'>
-                        <Option value='Phú Yên'>Phú Yên</Option>
-                        <Option value='HCM'>HCM</Option>
-                        <Option value='Hà Nội'>Hà Nội</Option>
-                    </Select>)}
-                </Row>
-            </Form.Item>
-            <Form.Item>
-                <Row style={{ marginTop: '1em' }} type='flex' justify='space-between'>
-                    {getFieldDecorator('ngaykhoihanh', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Vui lòng chọn ngày khởi hành'
-                            }
-                        ]
-                    })(<DatePicker placeholder='Ngày khởi hành' style={{ width: '49%' }} format={'YYYY/MM/DD'} />)}
-                    {getFieldDecorator('soluong', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Vui lòng chọn số lượng!'
-                            }
-                        ]
-                    })(<InputNumber placeholder='Số lượng' style={{ width: '49%' }} />)}
-                </Row>
-                <Row style={{ marginTop: '1em' }}>
-                    <Button htmlType='submit' type='danger' block>Đặt vé</Button>
-                </Row>
-            </Form.Item>
-        </Form>
-    )
+function SearchRouteForm(props) {
+  const { form, history } = props
+  const { getFieldDecorator, validateFields } = form
+  const { data, loading } = useQuery(GET_ALL_TUYEN)
+
+  if (loading) {
+    return null
+  }
+  const diemDis = []
+  const diemDens = []
+  data &&
+    data.getAllTuyen &&
+    data.getAllTuyen.map(tuyen => {
+      if (diemDis.indexOf(tuyen.diemDi) === -1) {
+        diemDis.push(tuyen.diemDi)
+      }
+      if (diemDens.indexOf(tuyen.diemDen) === -1) {
+        diemDens.push(tuyen.diemDen)
+      }
+    })
+
+  function searchRoute(e) {
+    e.preventDefault()
+    validateFields(async (err, values) => {
+      if (!err) {
+        const { diemDi, diemDen, thoiGianKhoiHanh, soLuong } = values
+        let timestamp
+        if (
+          thoiGianKhoiHanh.format('YYYY-MM-DD') ===
+          new Date().toISOString().split('T')[0]
+        ) {
+          timestamp = new Date(
+            thoiGianKhoiHanh.format('YYYY-MM-DD HH:mm:ss')
+          ).getTime()
+        } else {
+          timestamp = new Date(
+            `${thoiGianKhoiHanh.format('YYYY-MM-DD')} 00:01:00`
+          ).getTime()
+        }
+        history.push({
+          pathname: '/datVe',
+          searchData: {
+            diemDi,
+            diemDen,
+            thoiGianKhoiHanh: timestamp,
+            soLuong
+          }
+        })
+      }
+    })
+  }
+
+  return (
+    <Form className='formSearchRouteHome' onSubmit={searchRoute}>
+      <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item
+          style={{ display: 'inline-block', width: '50%', padding: '0 3px' }}
+        >
+          {getFieldDecorator('diemDi', {
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng chọn điểm đi !'
+              }
+            ]
+          })(
+            <Select style={{ width: '100%' }} placeholder='Điểm đi'>
+              {diemDis.map(diem => (
+                <Option key={diem} value={diem}>
+                  {diem}
+                </Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+        <Form.Item
+          style={{ display: 'inline-block', width: '50%', padding: '0 3px' }}
+        >
+          {getFieldDecorator('diemDen', {
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng chọn điểm đến !'
+              }
+            ]
+          })(
+            <Select style={{ width: '100%' }} placeholder='Điểm đến'>
+              {diemDens.map(diem => (
+                <Option key={diem} value={diem}>
+                  {diem}
+                </Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+      </Form.Item>
+      <Form.Item style={{ marginBottom: 0 }}>
+        <Form.Item
+          style={{ display: 'inline-block', width: '50%', padding: '0 3px' }}
+        >
+          {getFieldDecorator('thoiGianKhoiHanh', {
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng chọn ngày khởi hành'
+              }
+            ]
+          })(
+            <DatePicker
+              disabledDate={current =>
+                current.isBefore(new Date().setDate(new Date().getDate() - 1))
+              }
+              placeholder='Ngày khởi hành'
+              style={{ width: '100%' }}
+            />
+          )}
+        </Form.Item>
+        <Form.Item
+          style={{ display: 'inline-block', width: '50%', padding: '0 3px' }}
+        >
+          {getFieldDecorator('soLuong', {
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng chọn số lượng!'
+              }
+            ]
+          })(
+            <InputNumber
+              min={1}
+              placeholder='Số lượng'
+              style={{ width: '100%' }}
+            />
+          )}
+        </Form.Item>
+      </Form.Item>
+      <Form.Item>
+        <Button htmlType='submit' type='danger' block>
+          Đặt vé
+        </Button>
+      </Form.Item>
+    </Form>
+  )
 }
 
 export default Form.create('SearchRoute')(SearchRouteForm)

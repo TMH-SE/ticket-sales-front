@@ -226,7 +226,7 @@ function ClientLayout(props) {
         </Header>
         <Content className='main-content'>
           <Suspense fallback={null}>
-            {React.cloneElement(children, { isMobile })}
+            {React.cloneElement(children, { isMobile, me: data && data.me })}
           </Suspense>
         </Content>
         <Footer>

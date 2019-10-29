@@ -110,10 +110,10 @@ function QuanLyTuyenForm(props) {
         </Form.Item>
         <Form.Item label='Quãng đường (KM)'>
           {getFieldDecorator('quangDuong', {
-            initialValue: quangDuong || 0
+            initialValue: quangDuong || undefined
           })(
             <InputNumber
-              min={0}
+              min={1}
               style={{ width: '100%' }}
               parser={value => value.replace(/[^\d]?|(,*)/g, '')}
             />

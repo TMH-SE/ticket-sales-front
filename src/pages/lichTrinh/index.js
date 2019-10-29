@@ -1,57 +1,85 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import './index.scss'
 
 import { Button, Icon, Row, Table } from 'antd'
 
 import React from 'react'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
+
+const GET_ALL_TUYEN = gql`
+  query getAllTuyen {
+    getAllTuyen {
+      id
+      diemDi
+      diemDen
+      quangDuong
+      thoiGian
+      giaVe
+      trangThai
+    }
+  }
+`
 
 function index(props) {
   const { isMobile, history } = props
+  const { data, loading } = useQuery(GET_ALL_TUYEN)
+  console.log(data)
+  let obj = {}
+  if (loading) {
+    return null
+  }
+  data.getAllTuyen &&
+    data.getAllTuyen.map(tuyen => {
+      if (obj.hasOwnProperty(tuyen.diemDi)) {
+          obj[tuyen.diemDi] = [...obj[tuyen.diemDi], tuyen]
+      } else {
+        obj[tuyen.diemDi] = [tuyen]
+      }
+    })
 
   const columns = [
     {
       title: 'Điểm đi',
       dataIndex: 'diemDi',
-      key: 'diemDi'
+      key: 'diemDi',
+      width: '20%'
     },
     {
       title: 'Điểm đến',
       dataIndex: 'diemDen',
-      key: 'diemDen'
-    },
-    {
-      title: 'Thời gian khởi hành',
-      dataIndex: 'thoiGianKhoiHanh',
-      key: 'thoiGianKhoiHanh'
-    },
-    {
-      title: 'Loại xe',
-      dataIndex: 'loaiXe',
-      key: 'loaiXe'
+      key: 'diemDen',
+      width: '20%'
     },
     {
       title: 'Quãng đường (km)',
       dataIndex: 'quangDuong',
-      key: 'quangDuong'
+      key: 'quangDuong',
+      width: '15%'
     },
     {
       title: 'Thời gian',
       dataIndex: 'thoiGian',
-      key: 'thoiGian'
+      key: 'thoiGian',
+      width: '15%'
     },
     {
       title: 'Giá vé (đ/vé)',
       dataIndex: 'giaVe',
-      key: 'giaVe'
+      key: 'giaVe',
+      width: '15%'
     },
     {
       title: 'Đặt Vé',
       dataIndex: '',
       key: 'x',
+      width: '15%',
       render: (t, r) => {
         const { diemDi, diemDen } = r
         const location = {
           pathname: "/datVe",
-          data: {
+          searchData: {
             diemDi: diemDi,
             diemDen: diemDen,
             thoiGianKhoiHanh: new Date().getTime(),
@@ -64,72 +92,19 @@ function index(props) {
       }
     }
   ]
-  
-  const tuyen = [
-    {
-      title: 'TPHCM',
-      data: [
-        {
-          id: 0,
-          diemDi: 'TPHCM',
-          diemDen: 'HN',
-          thoiGianKhoiHanh: '7h30',
-          loaiXe: 'Giường',
-          quangDuong: '1030',
-          thoiGian: '6h30',
-          giaVe: '300000'
-        },
-        {
-          id: 1,
-          diemDi: 'TPHCM',
-          diemDen: 'HN',
-          thoiGianKhoiHanh: '8h30',
-          loaiXe: 'Giường',
-          quangDuong: '1030',
-          thoiGian: '6h30',
-          giaVe: '300000'
-        }
-      ]
-    },
-    {
-      title: 'Hà Nội',
-      data: [
-        {
-          id: 2,
-          diemDi: 'Hà Nội',
-          diemDen: 'TPHCM',
-          thoiGianKhoiHanh: '7h30',
-          loaiXe: 'Giường',
-          quangDuong: '1030',
-          thoiGian: '6h30',
-          giaVe: '300000'
-        },
-        {
-          id: 3,
-          diemDi: 'Hà Nội',
-          diemDen: 'TPHCM',
-          thoiGianKhoiHanh: '8h30',
-          loaiXe: 'Giường',
-          quangDuong: '1030',
-          thoiGian: '6h30',
-          giaVe: '300000'
-        }
-      ]
-    }
-  ]
 
   return (
     <div className='lichtrinh'>
-      {tuyen.map((item, index) => (
+      {Object.keys(obj).map((item, index) => (
         <Row key={index}>
           <h3 style={{ fontWeight: '700', color: '#f00', marginTop: '.5em' }}>
-            <Icon type='swap' /> {item.title}
+            <Icon type='swap' /> {item}
           </h3>
           <Table
             rowKey={r => r.id}
             scroll={{ x: isMobile }}
             columns={columns}
-            dataSource={item.data}
+            dataSource={obj[item]}
           />
           <hr />
         </Row>
