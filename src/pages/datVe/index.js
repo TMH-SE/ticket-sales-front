@@ -21,7 +21,8 @@ const { Step } = Steps
 const { Option } = Select
 
 function index(props) {
-  const { form, isMobile, history } = props
+  const { form, isMobile, history, location } = props
+  console.log(location)
   //const { getFieldDecorator, validateFields } = form
   const [current, setCurrent] = useState(0)
   const columns = [

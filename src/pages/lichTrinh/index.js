@@ -2,129 +2,121 @@ import './index.scss'
 
 import { Button, Icon, Row, Table } from 'antd'
 
-import { Link } from 'react-router-dom'
 import React from 'react'
 
-const columns = [
-  {
-    title: 'Điểm đi',
-    dataIndex: 'diemDi',
-    key: 'diemDi'
-  },
-  {
-    title: 'Điểm đến',
-    dataIndex: 'diemDen',
-    key: 'diemDen'
-  },
-  {
-    title: 'Thời gian khởi hành',
-    dataIndex: 'thoiGianKhoiHanh',
-    key: 'thoiGianKhoiHanh'
-  },
-  {
-    title: 'Loại xe',
-    dataIndex: 'loaiXe',
-    key: 'loaiXe'
-  },
-  {
-    title: 'Quãng đường (km)',
-    dataIndex: 'quangDuong',
-    key: 'quangDuong'
-  },
-  {
-    title: 'Thời gian',
-    dataIndex: 'thoiGian',
-    key: 'thoiGian'
-  },
-  {
-    title: 'Giá vé (đ/vé)',
-    dataIndex: 'giaVe',
-    key: 'giaVe'
-  },
-  {
-    title: 'Đặt Vé',
-    dataIndex: '',
-    key: 'x',
-    render: (t, r) => {
-      const { diemDi, diemDen, quangDuong, thoiGian, thoiGianKhoiHanh, giaVe, id, loaiXe } = r
-      return (
-        <Link to={
-          {
-            pathname: "/datVe",
-            data: {
-              diemDi: diemDi,
-              diemDen: diemDen,
-              quangDuong: quangDuong,
-              thoiGian: thoiGian,
-              thoiGianKhoiHanh: thoiGianKhoiHanh,
-              giaVe: giaVe,
-              id: id,
-              loaiXe: loaiXe
-            }
-          }
-        } > Đặt vé</Link >
-      )
-    }
-  }
-]
-
-const tuyen = [
-  {
-    title: 'TPHCM',
-    data: [
-      {
-        id: 0,
-        diemDi: 'TPHCM',
-        diemDen: 'HN',
-        thoiGianKhoiHanh: '7h30',
-        loaiXe: 'Giường',
-        quangDuong: '1030',
-        thoiGian: '6h30',
-        giaVe: '300000'
-      },
-      {
-        id: 1,
-        diemDi: 'TPHCM',
-        diemDen: 'HN',
-        thoiGianKhoiHanh: '8h30',
-        loaiXe: 'Giường',
-        quangDuong: '1030',
-        thoiGian: '6h30',
-        giaVe: '300000'
-      }
-    ]
-  },
-  {
-    title: 'Hà Nội',
-    data: [
-      {
-        id: 2,
-        diemDi: 'Hà Nội',
-        diemDen: 'TPHCM',
-        thoiGianKhoiHanh: '7h30',
-        loaiXe: 'Giường',
-        quangDuong: '1030',
-        thoiGian: '6h30',
-        giaVe: '300000'
-      },
-      {
-        id: 3,
-        diemDi: 'Hà Nội',
-        diemDen: 'TPHCM',
-        thoiGianKhoiHanh: '8h30',
-        loaiXe: 'Giường',
-        quangDuong: '1030',
-        thoiGian: '6h30',
-        giaVe: '300000'
-      }
-    ]
-  }
-]
-
-
 function index(props) {
-  const { isMobile } = props
+  const { isMobile, history } = props
 
+  const columns = [
+    {
+      title: 'Điểm đi',
+      dataIndex: 'diemDi',
+      key: 'diemDi'
+    },
+    {
+      title: 'Điểm đến',
+      dataIndex: 'diemDen',
+      key: 'diemDen'
+    },
+    {
+      title: 'Thời gian khởi hành',
+      dataIndex: 'thoiGianKhoiHanh',
+      key: 'thoiGianKhoiHanh'
+    },
+    {
+      title: 'Loại xe',
+      dataIndex: 'loaiXe',
+      key: 'loaiXe'
+    },
+    {
+      title: 'Quãng đường (km)',
+      dataIndex: 'quangDuong',
+      key: 'quangDuong'
+    },
+    {
+      title: 'Thời gian',
+      dataIndex: 'thoiGian',
+      key: 'thoiGian'
+    },
+    {
+      title: 'Giá vé (đ/vé)',
+      dataIndex: 'giaVe',
+      key: 'giaVe'
+    },
+    {
+      title: 'Đặt Vé',
+      dataIndex: '',
+      key: 'x',
+      render: (t, r) => {
+        const { diemDi, diemDen } = r
+        const location = {
+          pathname: "/datVe",
+          data: {
+            diemDi: diemDi,
+            diemDen: diemDen,
+            thoiGianKhoiHanh: new Date().getTime(),
+            soLuong: 1
+          }
+        }
+        return (
+          <Button type='danger' onClick={() => history.push(location)}>Đặt vé</Button>
+        )
+      }
+    }
+  ]
+  
+  const tuyen = [
+    {
+      title: 'TPHCM',
+      data: [
+        {
+          id: 0,
+          diemDi: 'TPHCM',
+          diemDen: 'HN',
+          thoiGianKhoiHanh: '7h30',
+          loaiXe: 'Giường',
+          quangDuong: '1030',
+          thoiGian: '6h30',
+          giaVe: '300000'
+        },
+        {
+          id: 1,
+          diemDi: 'TPHCM',
+          diemDen: 'HN',
+          thoiGianKhoiHanh: '8h30',
+          loaiXe: 'Giường',
+          quangDuong: '1030',
+          thoiGian: '6h30',
+          giaVe: '300000'
+        }
+      ]
+    },
+    {
+      title: 'Hà Nội',
+      data: [
+        {
+          id: 2,
+          diemDi: 'Hà Nội',
+          diemDen: 'TPHCM',
+          thoiGianKhoiHanh: '7h30',
+          loaiXe: 'Giường',
+          quangDuong: '1030',
+          thoiGian: '6h30',
+          giaVe: '300000'
+        },
+        {
+          id: 3,
+          diemDi: 'Hà Nội',
+          diemDen: 'TPHCM',
+          thoiGianKhoiHanh: '8h30',
+          loaiXe: 'Giường',
+          quangDuong: '1030',
+          thoiGian: '6h30',
+          giaVe: '300000'
+        }
+      ]
+    }
+  ]
 
   return (
     <div className='lichtrinh'>
