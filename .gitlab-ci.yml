@@ -18,7 +18,7 @@ deployFrontToAWS:
      - chmod 600 ~/.ssh/id_rsa
      - npm install
   script:
-    - npm rebuild node-sass
+    # - npm rebuild node-sass
     - CI="" npm run build
     - ls
     - ssh -o "StrictHostKeyChecking=no" ec2-user@3.229.129.81 'rm -rf /home/ec2-user/ticket-sales-front/build/'
