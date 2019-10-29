@@ -5,11 +5,12 @@ import './index.scss'
 import { Button, Col, Row, Table } from 'antd'
 import React, { useState } from 'react'
 import { convertTimeStamp, minutesToHours } from '../../utils/convertTime'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 
 import ActionComponent from '../../components/actionComponent'
 import QuanLyChuyenForm from './quanLyChuyenForm'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { openNotificationWithIcon } from '../../components/notification'
 
 const GET_ALL_CHUYEN = gql`
   query getAllChuyen {
@@ -30,11 +31,32 @@ const GET_ALL_CHUYEN = gql`
   }
 `
 
+const XOA_CHUYEN = gql`
+  mutation xoaChuyen($id: ID!) {
+    xoaChuyen(id: $id)
+  }
+`
+
 function index() {
   const [updatedData, setUpdatedData] = useState({})
   const [visible, setVisible] = useState(false)
   const { data, refetch } = useQuery(GET_ALL_CHUYEN)
+  const [xoaChuyen] = useMutation(XOA_CHUYEN)
 
+  const confirmDelete = async id => {
+    const dat = await xoaChuyen({
+      variables: {
+        id
+      }
+    })
+    if (dat) {
+      openNotificationWithIcon('success', 'Xóa chuyến xe thành công')
+      refetch()
+    } else {
+      openNotificationWithIcon('success', 'Xóa chuyến xe thất bại')
+    }
+  }
+  
   const columns = [
     {
       title: 'Điểm đi',
@@ -73,7 +95,7 @@ function index() {
       key: 'thoiGian',
       render: t => {
         const time = minutesToHours(t)
-        return <span>{`${time.hour}h${time.minute}'`}</span>
+        return <span>{`${time.hour}h${time.minute}p`}</span>
       }
     },
     {
@@ -99,6 +121,7 @@ function index() {
             setVisible(true)
             setUpdatedData(r)
           }}
+          confirm={() => confirmDelete(t)}
         />
       )
     }
@@ -118,7 +141,12 @@ function index() {
         </Col>
         <Col xs={{ span: 24 }} md={{ span: 12 }}>
           <Row type='flex' justify='end' align='middle'>
-            <Button onClick={() => setVisible(true)} className='btnAction' type='primary' icon='plus'>
+            <Button
+              onClick={() => setVisible(true)}
+              className='btnAction'
+              type='primary'
+              icon='plus'
+            >
               Thêm chuyến xe mới
             </Button>
           </Row>
@@ -131,7 +159,11 @@ function index() {
           rowKey={r => r.id}
         />
       </div>
-      <QuanLyChuyenForm visible={visible} closeForm={closeForm} updatedData={updatedData} />
+      <QuanLyChuyenForm
+        visible={visible}
+        closeForm={closeForm}
+        updatedData={updatedData}
+      />
     </div>
   )
 }

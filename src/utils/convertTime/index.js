@@ -17,6 +17,7 @@ export const convertTimeStamp = timestamp => {
   const date = new Date(timestamp).getDate()
   const month = new Date(timestamp).getMonth() + 1
   const year = new Date(timestamp).getFullYear()
-  const time = new Date(timestamp).toTimeString().split(' ')[0]
-  return `${year}-${month}-${date} ${time}`
+  const hour = new Date(timestamp).getHours()
+  const min = new Date(timestamp).getMinutes()
+  return `${year}-${month}-${date} ${hour < 10 ? `0${hour}` : hour}:${min < 10 ? `0${min}` : min}`
 }
