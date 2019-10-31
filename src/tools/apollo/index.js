@@ -10,10 +10,12 @@ import { setContext } from 'apollo-link-context'
 
 const protocol = window.location.protocol
 const host = window.location.hostname
-const port = process.env.REACT_APP_BE_PORT
+const port = 9000
 const endpoint = 'ticketgraphql'
 
-const urn = process.env.REACT_APP_BE_URN || `${host}${port ? `:${port}` : ''}/${endpoint}`
+const urn =
+  process.env.REACT_APP_BE_URN ||
+  `${host}${window.location.host === 'vexeonline.ga' ? '' : port}/${endpoint}`
 
 const httpLink = new HttpLink({
   uri: `${protocol}//${urn}`
@@ -41,20 +43,25 @@ const splitLink = split(
   httpLink
 )
 
-const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
-  if (graphQLErrors) {
-    if (graphQLErrors[0].extensions.code === '403' || graphQLErrors[0].extensions.code === '423') {
-      window.localStorage.clear()
-      window.location.href = '/login'
+const errorLink = onError(
+  ({ graphQLErrors, networkError, operation, response }) => {
+    if (graphQLErrors) {
+      if (
+        graphQLErrors[0].extensions.code === '403' ||
+        graphQLErrors[0].extensions.code === '423'
+      ) {
+        window.localStorage.clear()
+        window.location.href = '/login'
+      }
+      response.errors = graphQLErrors[0]
     }
-    response.errors = graphQLErrors[0]
+    if (networkError) {
+      console.log(
+        `[Network error ${operation.operationName}]: ${networkError.message}`
+      )
+    }
   }
-  if (networkError) {
-    console.log(
-      `[Network error ${operation.operationName}]: ${networkError.message}`
-    )
-  }
-})
+)
 
 const link = ApolloLink.from([errorLink, splitLink])
 
