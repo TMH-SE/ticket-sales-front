@@ -15,7 +15,7 @@ const endpoint = 'ticketgraphql'
 
 const urn =
   process.env.REACT_APP_BE_URN ||
-  `${host}${window.location.host === 'vexeonline.ga' ? '' : port}/${endpoint}`
+  `${host}${window.location.host === 'vexeonline.ga' ? '' : `:${port}`}/${endpoint}`
 
 const httpLink = new HttpLink({
   uri: `${protocol}//${urn}`
