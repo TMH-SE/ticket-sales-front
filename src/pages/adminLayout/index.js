@@ -9,7 +9,7 @@ function AdminLayout(props) {
     <div
       style={{
         background: 'linear-gradient(#9198e5, #e66465)',
-        height: '100vh'
+        minHeight: '100vh'
       }}
     >
       <Suspense fallback={null}>

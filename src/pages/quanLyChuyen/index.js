@@ -56,7 +56,7 @@ function index() {
       openNotificationWithIcon('success', 'Xóa chuyến xe thất bại')
     }
   }
-  
+
   const columns = [
     {
       title: 'Điểm đi',
