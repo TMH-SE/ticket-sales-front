@@ -3,7 +3,7 @@ import { Button, Col, Icon, Radio, Row } from 'antd'
 import React from 'react'
 
 function ThanhToanStep(props) {
-  const { datVe } = props
+  const { datVe, prev } = props
   return (
     <div>
       <Row>
@@ -29,6 +29,12 @@ function ThanhToanStep(props) {
           </Radio.Group>
         </Col>
       </Row>
+      <Button
+        style={{ marginRight: '1em', width: '100px' }}
+        onClick={() => prev()}
+      >
+        Trở lại
+      </Button>
       <Button onClick={datVe} style={{ width: '100px', marginTop: '1em' }} type='primary'>
         Thanh toán
       </Button>

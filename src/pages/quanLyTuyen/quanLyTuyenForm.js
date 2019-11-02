@@ -20,7 +20,7 @@ const CAP_NHAT_TUYEN = gql`
 
 function QuanLyTuyenForm(props) {
   const { visible, closeForm, form, updatedData } = props
-  const { getFieldDecorator, validateFields } = form
+  const { getFieldDecorator, validateFields, getFieldValue } = form
 
   const [themTuyen] = useMutation(THEM_TUYEN)
   const [capNhatTuyen] = useMutation(CAP_NHAT_TUYEN)
@@ -47,9 +47,10 @@ function QuanLyTuyenForm(props) {
               }
             }
           })
-          if (data) {
+          if (data && data.themTuyen) {
             openNotificationWithIcon('success', 'Cập nhật thành công')
             closeForm()
+            form.resetFields()
           } else {
             openNotificationWithIcon('error', 'Cập nhật thất bại')
           }
@@ -65,16 +66,24 @@ function QuanLyTuyenForm(props) {
               }
             }
           })
-          if (data) {
+          if (data  && data.themTuyen) {
             openNotificationWithIcon('success', 'Thêm tuyến xe mới thành công')
             closeForm()
+            form.resetFields()
           } else {
-            openNotificationWithIcon('error', 'Thêm tuyến xe thất bại')
+            openNotificationWithIcon('error', 'Tuyến xe này đã tồn tại')
           }
         }
-        form.resetFields()
       }
     })
+  }
+
+  const kiemTraTrungDiaDiem = (rule, value, callback) => {
+    if (value === getFieldValue('diemDi')) {
+      callback('Điểm đến không được trùng với điểm đi')
+    } else {
+      callback()
+    }
   }
   return (
     <Modal
@@ -104,13 +113,22 @@ function QuanLyTuyenForm(props) {
               {
                 required: true,
                 message: 'Vui lòng nhập điểm đến'
+              },
+              {
+                validator: kiemTraTrungDiaDiem
               }
             ]
           })(<Input />)}
         </Form.Item>
         <Form.Item label='Quãng đường (KM)'>
           {getFieldDecorator('quangDuong', {
-            initialValue: quangDuong || undefined
+            initialValue: quangDuong || undefined,
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng nhập độ dài quãng đường'
+              }
+            ]
           })(
             <InputNumber
               min={1}

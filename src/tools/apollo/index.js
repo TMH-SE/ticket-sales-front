@@ -10,7 +10,7 @@ import { setContext } from 'apollo-link-context'
 
 const protocol = window.location.protocol
 const host = window.location.hostname
-const port = 9000
+const port = process.env.REACT_APP_BE_PORT || 9000
 const endpoint = 'ticketgraphql'
 
 const urn =

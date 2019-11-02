@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+
 import './index.scss'
 
 import { Button, DatePicker, Form, InputNumber, Select } from 'antd'
@@ -147,6 +149,15 @@ function SearchRouteForm(props) {
               {
                 required: true,
                 message: 'Vui lòng chọn số lượng!'
+              },
+              {
+                validator: (rule, value, callback) => {
+                  if (value && value < 1) {
+                    callback('Số lượng cần tìm nhỏ nhất là 1')
+                  } else {
+                    callback()
+                  }
+                }
               }
             ]
           })(

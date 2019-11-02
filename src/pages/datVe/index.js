@@ -2,7 +2,7 @@
 
 import './index.scss'
 
-import { Button, Col, Icon, Row, Steps } from 'antd'
+import { Button, Icon, Row, Steps } from 'antd'
 import React, { useState } from 'react'
 
 import ChonGhe from './chonGhe'
@@ -22,7 +22,7 @@ const THEM_VE = gql`
 `
 
 function index(props) {
-  const { isMobile, location, me } = props
+  const { isMobile, location, me, history } = props
 
   const [current, setCurrent] = useState(0)
   const [searchData, setSearchData] = useState(location.searchData)
@@ -82,6 +82,7 @@ function index(props) {
       title: 'Nhập Thông Tin',
       content: (
         <NhapThongTinStep
+          khachHang={khachHang}
           setKhachHang={setKhachHang}
           next={next}
           prev={prev}
@@ -91,18 +92,30 @@ function index(props) {
     },
     {
       title: 'Thanh Toán',
-      content: <ThanhToanStep datVe={datVe} />
+      content: <ThanhToanStep datVe={datVe} prev={prev} />
     },
     {
       title: 'Đặt Vé Thành Công',
       content: (
-        <Row type='flex' align='middle' justify='center'>
-          <Icon
-            type='check-circle'
-            style={{ color: 'green', fontSize: '15em', marginTop: '10px' }}
-          />
-          <h2 style={{ margin: '2em', textTransform: 'uppercase' }}>Bạn đã đặt vé thành công!</h2>
-        </Row>
+        <div>
+          <Row type='flex' align='middle' justify='center'>
+            <Icon
+              type='check-circle'
+              style={{ color: 'green', fontSize: '15em', marginTop: '10px' }}
+            />
+            <h2 style={{ margin: '2em', textTransform: 'uppercase' }}>
+              Bạn đã đặt vé thành công!
+            </h2>
+          </Row>
+          <Button
+            type='primary'
+            onClick={() => {
+              history.push('/datVe')
+            }}
+          >
+            Hoàn tất
+          </Button>
+        </div>
       )
     }
   ]

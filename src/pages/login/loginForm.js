@@ -83,11 +83,6 @@ function LoginForm(props) {
         )}
       </Form.Item>
       <Form.Item>
-        <span className='form-forgot'>
-          <Button type='link' className='btnLink'>
-            <u>Quên mật khẩu?</u>
-          </Button>
-        </span>
         <Button htmlType='submit' type='primary' block>
           Đăng nhập
         </Button>

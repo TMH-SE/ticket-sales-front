@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, Row } from 'antd'
 import React from 'react'
 
 function NhapThongTinStep(props) {
-  const { me, form, next, prev, setKhachHang } = props
+  const { me, form, next, prev, setKhachHang, khachHang } = props
   const { getFieldDecorator, validateFields } = form
   const submit = e => {
     e.preventDefault()
@@ -22,7 +22,7 @@ function NhapThongTinStep(props) {
           <Form>
             <Form.Item label='Họ tên' hasFeedback>
               {getFieldDecorator('hoTen', {
-                initialValue: me && me.hoTen,
+                initialValue: khachHang.hoTen || (me && me.hoTen),
                 rules: [
                   {
                     required: true,
@@ -33,7 +33,7 @@ function NhapThongTinStep(props) {
             </Form.Item>
             <Form.Item label='Số CMND' hasFeedback>
               {getFieldDecorator('soCMND', {
-                initialValue: me && me.soCMND,
+                initialValue: khachHang.soCMND || (me && me.soCMND),
                 rules: [
                   {
                     pattern: /^\d{9,12}$/,
@@ -48,7 +48,7 @@ function NhapThongTinStep(props) {
             </Form.Item>
             <Form.Item label='Địa chỉ' hasFeedback>
               {getFieldDecorator('diaChi', {
-                initialValue: me && me.diaChi,
+                initialValue: khachHang.diaChi || (me && me.diaChi),
                 rules: [
                   {
                     required: true,
@@ -59,7 +59,7 @@ function NhapThongTinStep(props) {
             </Form.Item>
             <Form.Item label='Số điện thoại' hasFeedback>
               {getFieldDecorator('soDienThoai', {
-                initialValue: me && me.soDienThoai,
+                initialValue: khachHang.soDienThoai || (me && me.soDienThoai),
                 rules: [
                   {
                     pattern: /^0[1-9]\d{8,9}$/,
@@ -74,7 +74,7 @@ function NhapThongTinStep(props) {
             </Form.Item>
             <Form.Item label='Email' hasFeedback>
               {getFieldDecorator('email', {
-                initialValue: me && me.email,
+                initialValue: khachHang.email || (me && me.email),
                 rules: [
                   {
                     type: 'email',

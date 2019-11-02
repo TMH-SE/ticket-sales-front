@@ -49,11 +49,12 @@ function index() {
         id
       }
     })
-    if (dat) {
+
+    if (dat.data.xoaChuyen) {
       openNotificationWithIcon('success', 'Xóa chuyến xe thành công')
       refetch()
     } else {
-      openNotificationWithIcon('success', 'Xóa chuyến xe thất bại')
+      openNotificationWithIcon('error', 'Chuyến xe đang hoạt động không thể xóa')
     }
   }
 

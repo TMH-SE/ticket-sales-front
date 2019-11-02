@@ -104,8 +104,14 @@ function QuanLyXeForm(props) {
         </Form.Item>
         <Form.Item label='Số ghế'>
           {getFieldDecorator('soGhe', {
-            initialValue: soGhe || 0
-          })(<InputNumber min={0} max={99} style={{ width: '100%' }} parser={value => value.replace(/[^\d]?|(,*)/g, '')} />)}
+            initialValue: soGhe || 1,
+            rules: [
+              {
+                required: true,
+                message: 'Vui lòng nhập số ghế'
+              }
+            ]
+          })(<InputNumber min={1} max={99} style={{ width: '100%' }} parser={value => value.replace(/[^\d]?|(,*)/g, '')} />)}
         </Form.Item>
       </Form>
     </Modal>
