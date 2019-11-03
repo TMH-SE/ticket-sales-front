@@ -42,11 +42,11 @@ function index() {
         id
       }
     })
-    if (dat) {
+    if (dat.data.xoaTuyen) {
       openNotificationWithIcon('success', 'Xóa tuyến xe thành công')
       refetch()
     } else {
-      openNotificationWithIcon('success', 'Xóa tuyến xe thất bại')
+      openNotificationWithIcon('error', 'Tuyến xe đang có chuyến hoạt động không thể xóa')
     }
   }
   const columns = [

@@ -55,7 +55,7 @@ function QuanLyTuyenForm(props) {
             openNotificationWithIcon('error', 'Cập nhật thất bại')
           }
         } else {
-          const data = await themTuyen({
+          const { data } = await themTuyen({
             variables: {
               input: {
                 diemDi,
@@ -66,7 +66,7 @@ function QuanLyTuyenForm(props) {
               }
             }
           })
-          if (data  && data.themTuyen) {
+          if (data && data.themTuyen) {
             openNotificationWithIcon('success', 'Thêm tuyến xe mới thành công')
             closeForm()
             form.resetFields()

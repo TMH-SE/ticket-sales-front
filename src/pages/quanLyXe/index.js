@@ -35,8 +35,8 @@ function index() {
 
   const { data, refetch } = useQuery(GET_ALL_XE)
   const [xoaXe] = useMutation(XOA_XE)
-  const confirmDelete = async (id) => {
-    const dat = await xoaXe({
+  const confirmDelete = async id => {
+    const { data: dat } = await xoaXe({
       variables: {
         id
       }
