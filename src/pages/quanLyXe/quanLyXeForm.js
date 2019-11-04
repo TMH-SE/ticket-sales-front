@@ -30,7 +30,7 @@ function QuanLyXeForm(props) {
       if (!err) {
         const { bienSoXe, loaiXe, soGhe } = values
         if (isUpdate) {
-          const data = await capNhatXe({
+          const { data } = await capNhatXe({
             variables: {
               id: updatedData.id,
               input: {
@@ -40,14 +40,14 @@ function QuanLyXeForm(props) {
               }
             }
           })
-          if (data) {
+          if (data && data.capNhatXe) {
             openNotificationWithIcon('success', 'Cập nhật thành công')
             closeForm()
           } else {
             openNotificationWithIcon('error', 'Cập nhật thất bại')
           }
         } else {
-          const data = await themXe({
+          const { data } = await themXe({
             variables: {
               input: {
                 bienSoXe,
@@ -56,7 +56,7 @@ function QuanLyXeForm(props) {
               }
             }
           })
-          if (data) {
+          if (data && data.themXe) {
             openNotificationWithIcon('success', 'Thêm xe mới thành công')
             closeForm()
           } else {
@@ -111,7 +111,14 @@ function QuanLyXeForm(props) {
                 message: 'Vui lòng nhập số ghế'
               }
             ]
-          })(<InputNumber min={1} max={99} style={{ width: '100%' }} parser={value => value.replace(/[^\d]?|(,*)/g, '')} />)}
+          })(
+            <InputNumber
+              min={1}
+              max={99}
+              style={{ width: '100%' }}
+              parser={value => value.replace(/[^\d]?|(,*)/g, '')}
+            />
+          )}
         </Form.Item>
       </Form>
     </Modal>

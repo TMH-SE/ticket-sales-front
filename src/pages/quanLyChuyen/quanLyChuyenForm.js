@@ -62,7 +62,7 @@ function QuanLyChuyenForm(props) {
       if (!err) {
         const { xeId, tuyenXeId, gioKhoiHanh, ngayKhoiHanh } = values
         if (id) {
-          const data = await capNhatChuyen({
+          const { data } = await capNhatChuyen({
             variables: {
               id,
               input: {
@@ -74,14 +74,14 @@ function QuanLyChuyenForm(props) {
               }
             }
           })
-          if (data) {
+          if (data && data.capNhatChuyen) {
             openNotificationWithIcon('success', 'Cập nhật thành công')
             closeForm()
           } else {
             openNotificationWithIcon('error', 'Cập nhật thất bại')
           }
         } else {
-          const data = await themChuyen({
+          const { data } = await themChuyen({
             variables: {
               input: {
                 tuyenXeId,
@@ -92,7 +92,7 @@ function QuanLyChuyenForm(props) {
               }
             }
           })
-          if (data) {
+          if (data && data.themChuyen) {
             openNotificationWithIcon('success', 'Thêm chuyến xe mới thành công')
             closeForm()
           } else {

@@ -35,7 +35,7 @@ function QuanLyTuyenForm(props) {
         const { diemDi, diemDen, quangDuong, hours, minutes, giaVe } = values
         const thoiGian = hourToMinute(hours, minutes)
         if (id) {
-          const data = await capNhatTuyen({
+          const { data } = await capNhatTuyen({
             variables: {
               id: id,
               input: {
@@ -47,7 +47,7 @@ function QuanLyTuyenForm(props) {
               }
             }
           })
-          if (data && data.themTuyen) {
+          if (data && data.capNhatTuyen) {
             openNotificationWithIcon('success', 'Cập nhật thành công')
             closeForm()
             form.resetFields()
