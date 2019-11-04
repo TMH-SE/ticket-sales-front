@@ -15,6 +15,7 @@ import {
 import React, { Suspense, useState } from 'react'
 
 import DoiMatKhau from '../doiMatKhau'
+import ModalXemVe from '../xemVe'
 import ThongTinCaNhanForm from '../thongTinCaNhan'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
@@ -43,6 +44,7 @@ function ClientLayout(props) {
   const [visible, setVisible] = useState(false)
   const [visibleForm, setVisibleForm] = useState(false)
   const [visiblePassForm, setVisiblePassForm] = useState(false)
+  const [visibleModal, setVisibleModal] = useState(false)
   const { data, refetch } = useQuery(GET_ME, {
     skip: !isAuth,
     fetchPolicy: 'cache-and-network'
@@ -72,6 +74,10 @@ function ClientLayout(props) {
       <Menu.Item onClick={() => setVisiblePassForm(true)} key={4}>
         <Icon type='key' />
         <span>Đổi mật khẩu</span>
+      </Menu.Item>
+      <Menu.Item onClick={() => setVisibleModal(true)} key={5}>
+        <Icon type='history' />
+        <span>Xem lịch sử đặt vé</span>
       </Menu.Item>
       <Menu.Item onClick={logout} key={3}>
         <Icon type='logout' />
@@ -160,9 +166,19 @@ function ClientLayout(props) {
                           <Icon type='user' />
                           <span>Thông tin cá nhân</span>
                         </Menu.Item>
-                        <Menu.Item onClick={() => setVisiblePassForm(true)} key={4}>
+                        <Menu.Item
+                          onClick={() => setVisiblePassForm(true)}
+                          key={4}
+                        >
                           <Icon type='key' />
                           <span>Đổi mật khẩu</span>
+                        </Menu.Item>
+                        <Menu.Item
+                          onClick={() => setVisibleModal(true)}
+                          key={5}
+                        >
+                          <Icon type='history' />
+                          <span>Xem lịch sử đặt vé</span>
                         </Menu.Item>
                         <Menu.Item onClick={logout} key={3}>
                           <Icon type='logout' />
@@ -277,14 +293,22 @@ function ClientLayout(props) {
           </div>
         </Footer>
       </Layout>
-      <ThongTinCaNhanForm
-        me={data && data.me}
-        isMobile={isMobile}
-        visibleForm={visibleForm}
-        refetchData={() => refetch()}
-        closeForm={() => setVisibleForm(false)}
-      />
-      <DoiMatKhau visiblePassForm={visiblePassForm} closePassForm={() => setVisiblePassForm(false)} />
+      {isAuth ? (
+        <>
+          <ThongTinCaNhanForm
+            me={data && data.me}
+            isMobile={isMobile}
+            visibleForm={visibleForm}
+            refetchData={() => refetch()}
+            closeForm={() => setVisibleForm(false)}
+          />
+          <DoiMatKhau
+            visiblePassForm={visiblePassForm}
+            closePassForm={() => setVisiblePassForm(false)}
+          />
+          <ModalXemVe isMobile={isMobile} visibleModal={visibleModal} closeModal={() => setVisibleModal(false)} />
+        </>
+      ) : null}
     </Layout>
   ) : (
     <Suspense fallback={null}>{children}</Suspense>
