@@ -16,7 +16,6 @@ import React, { Suspense, useState } from 'react'
 
 import DoiMatKhau from '../doiMatKhau'
 import ThongTinCaNhanForm from '../thongTinCaNhan'
-import avt from '../../assets/avatar.png'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
 import { publicMenu } from '../../routers'
@@ -60,7 +59,7 @@ function ClientLayout(props) {
   const info = (
     <Menu>
       <Menu.Item disabled key={1}>
-        <Avatar src={avt} />
+        <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
         <span style={{ color: '#000', fontWeight: 'bold', marginLeft: '1em' }}>
           {isAuth && fullName}
         </span>
@@ -144,7 +143,7 @@ function ClientLayout(props) {
                         key='sub4'
                         title={
                           <span>
-                            <Avatar src={avt} />
+                            <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
                             <span
                               style={{
                                 color: '#000',
@@ -208,7 +207,7 @@ function ClientLayout(props) {
                         trigger={['click']}
                         placement='bottomRight'
                       >
-                        <Avatar src={avt} />
+                        <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
                       </Dropdown>
                     ) : (
                       <Button

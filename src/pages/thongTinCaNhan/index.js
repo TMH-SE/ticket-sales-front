@@ -1,7 +1,6 @@
 import { Avatar, Button, Col, Drawer, Form, Input, Row } from 'antd'
 
 import React from 'react'
-import avt from '../../assets/avatar.png'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
 import { useMutation } from '@apollo/react-hooks'
@@ -58,7 +57,7 @@ function ThongTinCaNhanForm(props) {
       width={isMobile ? '100%' : '50%'}
       title={
         <>
-          <Avatar src={avt} />
+          <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
           <span
             style={{ color: '#000', fontWeight: 'bold', marginLeft: '1em' }}
           >

@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 
 import LoginForm from './loginForm'
 import RegisterForm from './registerForm'
-import background from '../../assets/background_login1.jpg'
 
 function index(props) {
   const { history, store } = props
@@ -16,7 +15,7 @@ function index(props) {
   return (
     <Row
       style={{
-        background: `url(${background}) no-repeat center`,
+        background: `url(https://ticket-app-resource.s3.amazonaws.com/background_login1.jpg) no-repeat center`,
         backgroundSize: 'cover',
         height: '100vh'
       }}

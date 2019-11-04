@@ -1,7 +1,6 @@
 import { Avatar, Divider, Dropdown, Icon, Menu, PageHeader } from 'antd'
 
 import React from 'react'
-import avt from '../../assets/avatar.png'
 import gql from 'graphql-tag'
 import { openNotificationWithIcon } from '../../components/notification'
 import { useQuery } from '@apollo/react-hooks'
@@ -20,7 +19,7 @@ function AdminPageHeader(props) {
   const info = (
     <Menu>
       <Menu.Item disabled style={{}}>
-        <Avatar src={avt} />
+        <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
         <span style={{ color: '#000', fontWeight: 'bold', marginLeft: '1em' }}>
           {data && data.me.hoTen}
         </span>
@@ -62,7 +61,7 @@ function AdminPageHeader(props) {
             trigger={['click']}
             placement='bottomRight'
           >
-            <Avatar src={avt} />
+            <Avatar src='https://ticket-app-resource.s3.amazonaws.com/avatar.png' />
           </Dropdown>
         ]}
         footer={<Divider style={{ margin: '0' }} />}
