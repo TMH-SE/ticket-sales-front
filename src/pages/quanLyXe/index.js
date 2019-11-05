@@ -41,11 +41,11 @@ function index() {
         id
       }
     })
-    if (dat) {
+    if (dat && dat.xoaXe) {
       openNotificationWithIcon('success', 'Xóa xe thành công')
       refetch()
     } else {
-      openNotificationWithIcon('success', 'Xóa xe thất bại')
+      openNotificationWithIcon('error', 'Xe đang hoạt động không thể xóa')
     }
   }
   const columns = [
