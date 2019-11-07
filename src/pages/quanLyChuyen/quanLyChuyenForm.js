@@ -154,6 +154,9 @@ function QuanLyChuyenForm(props) {
                 : null
             })(
               <DatePicker
+                disabledDate={current =>
+                  current.isBefore(new Date().setDate(new Date().getDate() - 1))
+                }
                 style={{ width: '90%' }}
                 placeholder='Chọn ngày khởi hành'
               />
